@@ -380,13 +380,13 @@ export async function evaluateTeam(
       // If balanced, should be around 1
       typeMatchupValue *
       // +1 since essential
-      Math.log(rockers + 1) *
+      Math.log(rockers + 2) *
       // +1 since essential
-      Math.log(hazardRemovals + 1) *
+      Math.log(hazardRemovals + 2) *
       // +2 since not essential
-      Math.log(otherHazards + 2) *
+      Math.log(otherHazards + 3) *
       // +2 since not essential
-      Math.log(momentumUser + 2) *
+      Math.log(momentumUser + 3) *
       // Can only reduce, since max is 1
       ownTypesCovered;
     // TODO: Implement Weather Bonus

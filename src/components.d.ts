@@ -2,12 +2,13 @@
 // We suggest you to commit this file into source control
 // Read more: https://github.com/vuejs/vue-next/pull/3399
 
-declare module "vue" {
+declare module 'vue' {
   export interface GlobalComponents {
-    MonRenderer: typeof import("./components/MonRenderer.vue")["default"];
-    SearchUI: typeof import("./components/SearchUI.vue")["default"];
-    TeamRenderer: typeof import("./components/TeamRenderer.vue")["default"];
+    MonRenderer: typeof import('./components/MonRenderer.vue')['default']
+    NavBar: typeof import('./components/NavBar.vue')['default']
+    SearchUI: typeof import('./components/SearchUI.vue')['default']
+    TeamRenderer: typeof import('./components/TeamRenderer.vue')['default']
   }
 }
 
-export {};
+export { }

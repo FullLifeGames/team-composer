@@ -4,7 +4,9 @@
       :src="sprite.url"
       :width="sprite.w"
       :height="sprite.h"
-      :style="sprite.pixelated ? 'imageRendering: pixelated;' : ''"
+      :style="
+        pixelatedUsed && sprite.pixelated ? 'imageRendering: pixelated;' : ''
+      "
     />
   </div>
 </template>
@@ -16,6 +18,7 @@ const props = defineProps<{
   generation: GenerationNum;
   mon: Species;
 }>();
+const pixelatedUsed = false;
 const sprite = computed(() => {
   return Sprites.getPokemon(props.mon.name, {
     gen: props.generation,
