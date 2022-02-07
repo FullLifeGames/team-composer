@@ -2,25 +2,12 @@
 // We suggest you to commit this file into source control
 // Read more: https://github.com/vuejs/vue-next/pull/3399
 
-declare module 'vue' {
+declare module "vue" {
   export interface GlobalComponents {
-    ButtonPrimary: typeof import('./components/shared/ButtonPrimary.vue')['default']
-    ButtonSecondary: typeof import('./components/shared/ButtonSecondary.vue')['default']
-    Feature: typeof import('./components/Feature.vue')['default']
-    Features: typeof import('./components/Features.vue')['default']
-    Heading1: typeof import('./components/shared/Heading1.vue')['default']
-    Heading2: typeof import('./components/shared/Heading2.vue')['default']
-    Hero: typeof import('./components/Hero.vue')['default']
-    MdiAlien: typeof import('~icons/mdi/alien')['default']
-    MdiArrowRight: typeof import('~icons/mdi/arrow-right')['default']
-    MdiGithub: typeof import('~icons/mdi/github')['default']
-    MdiMoonWaningCrescent: typeof import('~icons/mdi/moon-waning-crescent')['default']
-    MdiWhiteBalanceSunny: typeof import('~icons/mdi/white-balance-sunny')['default']
-    MonRenderer: typeof import('./components/MonRenderer.vue')['default']
-    Navbar: typeof import('./components/Navbar.vue')['default']
-    SearchUI: typeof import('./components/SearchUI.vue')['default']
-    TeamRenderer: typeof import('./components/TeamRenderer.vue')['default']
+    MonRenderer: typeof import("./components/MonRenderer.vue")["default"];
+    SearchUI: typeof import("./components/SearchUI.vue")["default"];
+    TeamRenderer: typeof import("./components/TeamRenderer.vue")["default"];
   }
 }
 
-export { }
+export {};

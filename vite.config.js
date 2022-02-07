@@ -1,19 +1,19 @@
-import path from 'path'
-import { defineConfig } from 'vite'
-import { createVuePlugin as Vue2 } from 'vite-plugin-vue2'
-import WindiCSS from 'vite-plugin-windicss'
-import Components from 'unplugin-vue-components/vite'
-import Icons from 'unplugin-icons/vite'
-import IconsResolver from 'unplugin-icons/resolver'
-import ScriptSetup from 'unplugin-vue2-script-setup/vite'
-import AutoImport from 'unplugin-auto-import/vite'
+import path from "path";
+import { defineConfig } from "vite";
+import { createVuePlugin as Vue2 } from "vite-plugin-vue2";
+import WindiCSS from "vite-plugin-windicss";
+import Components from "unplugin-vue-components/vite";
+import Icons from "unplugin-icons/vite";
+import IconsResolver from "unplugin-icons/resolver";
+import ScriptSetup from "unplugin-vue2-script-setup/vite";
+import AutoImport from "unplugin-auto-import/vite";
 
 const config = defineConfig({
   resolve: {
     alias: {
-      '@': `${path.resolve(__dirname, 'src')}`,
+      "@": `${path.resolve(__dirname, "src")}`,
     },
-    dedupe: ['vue-demi'],
+    dedupe: ["vue-demi"],
   },
 
   build: {
@@ -27,25 +27,21 @@ const config = defineConfig({
     Components({
       resolvers: [
         IconsResolver({
-          componentPrefix: '',
+          componentPrefix: "",
         }),
       ],
-      dts: 'src/components.d.ts',
+      dts: "src/components.d.ts",
     }),
     Icons(),
     AutoImport({
-      imports: [
-        '@vue/composition-api',
-        'vue-router',
-        '@vueuse/core',
-      ],
-      dts: 'src/auto-imports.d.ts',
+      imports: ["@vue/composition-api", "vue-router", "@vueuse/core"],
+      dts: "src/auto-imports.d.ts",
     }),
   ],
 
   server: {
     port: 3333,
   },
-})
+});
 
-export default config
+export default config;

@@ -1,8 +1,7 @@
 <template>
   <div id="app">
-    <Navbar />
-    <main>
+    <b-container class="text-center">
       <RouterView />
-    </main>
+    </b-container>
   </div>
 </template>

@@ -1,31 +1,28 @@
-import Vue from 'vue'
-import { createApp, h } from 'vue-demi'
-import VueCompositionApi from '@vue/composition-api'
-import App from '@/App.vue'
+import Vue from "vue";
+import { createApp, h } from "vue-demi";
+import VueCompositionApi from "@vue/composition-api";
+import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+// Import Bootstrap an BootstrapVue CSS files (order is important)
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
 
-import 'windi.css'
-import router from '@/router'
-import { parseFile, stringsToSpecies } from './util/oldParsingLogic';
-import { generateTeam } from './util/algorithm'
+import App from "@/App.vue";
 
-Vue.use(VueCompositionApi)
+import "windi.css";
+import router from "@/router";
 
-Vue.config.productionTip = false
-Vue.config.devtools = true
+Vue.use(VueCompositionApi);
+// Make BootstrapVue available throughout your project
+Vue.use(BootstrapVue);
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin);
 
-const generation = 8;
-
-async function test() {
-  const parsedMons = await parseFile();
-
-  console.log(await generateTeam(generation, stringsToSpecies(generation, parsedMons), [2, 2, 3, 2, 2], 1));
-}
-
-test();
+Vue.config.productionTip = false;
+Vue.config.devtools = true;
 
 const app = createApp({
   router,
   render: () => h(App),
-})
+});
 
-app.mount('#app')
+app.mount("#app");
