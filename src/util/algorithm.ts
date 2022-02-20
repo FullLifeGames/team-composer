@@ -379,14 +379,20 @@ export async function evaluateTeam(
       statValue *
       // If balanced, should be around 1
       typeMatchupValue *
-      // +1 since essential
-      Math.log(rockers + 2) *
-      // +1 since essential
-      Math.log(hazardRemovals + 2) *
-      // +2 since not essential
-      Math.log(otherHazards + 3) *
-      // +2 since not essential
-      Math.log(momentumUser + 3) *
+      // +2 since essential for Gen 4, Rest 1
+      (algorithmState.rocker.length > 0 ? Math.log(rockers + 2) : 1) *
+      // +2 since essential for Gen 6 >=, otherwise +3
+      (algorithmState.hazardRemover.length > 0
+        ? Math.log(hazardRemovals + (algorithmState.generation >= 6 ? 3 : 2))
+        : 1) *
+      // +3 since not essential
+      (algorithmState.otherHazards.length > 0
+        ? Math.log(otherHazards + 3)
+        : 1) *
+      // +3 since not essential
+      (algorithmState.momentumUser.length > 0
+        ? Math.log(momentumUser + 3)
+        : 1) *
       // Can only reduce, since max is 1
       ownTypesCovered;
     // TODO: Implement Weather Bonus
