@@ -422,7 +422,10 @@ export async function generateTeam(
           // Species Clause
           if (
             !currentRequirementSpecies.some(
-              (s) => s.num === workingSpecies[foundMon].num
+              (s) =>
+                s.num === workingSpecies[foundMon].num ||
+                (s.name === "-Mega" &&
+                  workingSpecies[foundMon].name === "-Mega")
             )
           )
             break;

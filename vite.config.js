@@ -27,7 +27,7 @@ const config = defineConfig({
     Components({
       resolvers: [
         IconsResolver({
-          componentPrefix: "",
+          prefix: "",
         }),
       ],
       dts: "src/components.d.ts",
@@ -41,7 +41,10 @@ const config = defineConfig({
 
   server: {
     port: 3333,
+    base: "./",
   },
+
+  base: "./",
 });
 
 export default config;

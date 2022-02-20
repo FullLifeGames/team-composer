@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="info">
+    <b-navbar toggleable="lg" type="dark" variant="dark">
       <router-link to="/" custom v-slot="{ href }">
         <b-navbar-brand :href="href">Team Composer</b-navbar-brand>
       </router-link>
@@ -15,8 +15,29 @@
           <router-link to="/team-evaluator" custom v-slot="{ href }">
             <b-nav-item :href="href">Team Evaluator</b-nav-item>
           </router-link>
+          <router-link to="/draft-league-application" custom v-slot="{ href }">
+            <b-nav-item :href="href">Draft League Application</b-nav-item>
+          </router-link>
+        </b-navbar-nav>
+        <!-- Right aligned nav items -->
+        <b-navbar-nav class="ml-auto navbarImage">
+          <b-nav-item href="https://fulllifegames.com"
+            ><img
+              class="img-fluid img-profile rounded-circle mx-auto mb-2 navbarImage"
+              src="https://fulllifegames.com/img/profile.jpg"
+              alt=""
+          /></b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
   </div>
 </template>
+
+<style scoped>
+.navbarImage {
+  height: 40px;
+}
+.navbarImage >>> img {
+  margin-top: -8px;
+}
+</style>

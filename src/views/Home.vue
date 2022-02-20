@@ -1,8 +1,11 @@
 <template>
   <div>
+    <LeagueSelector class="spacedElement" @change="changeDraftMonsUrl" />
     <TeamRenderer
+      class="spacedElement"
       :evaluation-report="evaluationReport"
-      :generation="generation"
+      :generation="league.generation"
+      :loading="loading"
       :team="team"
     />
     <b-button @click="generate"> Generate </b-button>
@@ -11,30 +14,50 @@
 </template>
 
 <script setup lang="ts">
-import type { GenerationNum, Species } from "@pkmn/dex";
+import type { Species } from "@pkmn/dex";
 import type { Ref } from "@vue/composition-api";
 import type { EvaluationReport } from "@/util/algorithm";
 import { generateTeam } from "@/util/algorithm";
 
 import { parseFile, stringsToSpecies } from "@/util/oldParsingLogic";
+import { League } from "@/types/league";
 
-const generation = ref(8 as GenerationNum);
+const league = ref({
+  csv: "",
+  displayName: "",
+  requirements: [2, 2, 3, 2, 2],
+  generation: 8,
+} as League);
+
 const team: Ref<Species[][]> = ref([]);
+const loading = ref(false);
 const evaluationReport: Ref<EvaluationReport> = ref({ value: 0 });
 
 async function generate() {
-  const parsedMons = await parseFile();
+  loading.value = true;
+  const parsedMons = await parseFile(league.value.csv);
 
   const result = await generateTeam(
-    generation.value,
-    stringsToSpecies(generation.value, parsedMons),
-    [2, 2, 3, 2, 2]
+    league.value.generation,
+    stringsToSpecies(league.value.generation, parsedMons),
+    league.value.requirements
   );
   // eslint-disable-next-line no-console
   console.log(result);
   team.value = result[0];
   evaluationReport.value = result[1];
+  loading.value = false;
 }
 
-generate();
+function changeDraftMonsUrl(newLeague: League) {
+  league.value = newLeague;
+  generate();
+}
 </script>
+
+<style scoped>
+.spacedElement {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+</style>

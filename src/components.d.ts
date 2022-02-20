@@ -4,6 +4,7 @@
 
 declare module "vue" {
   export interface GlobalComponents {
+    LeagueSelector: typeof import("./components/LeagueSelector.vue")["default"];
     MonRenderer: typeof import("./components/MonRenderer.vue")["default"];
     NavBar: typeof import("./components/NavBar.vue")["default"];
     SearchUI: typeof import("./components/SearchUI.vue")["default"];

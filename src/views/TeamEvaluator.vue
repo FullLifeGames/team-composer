@@ -4,16 +4,22 @@
       v-if="team.length > 0"
       :evaluation-report="evaluationReport"
       :generation="generation"
+      :loading="false"
       :team="team"
     />
     <b-form-textarea
+      class="moreSpace"
       id="textarea"
       v-model="teamDefinition"
       placeholder="Input Showdown Importable"
       rows="3"
     ></b-form-textarea>
-    <b-form-select v-model="generation" :options="options"></b-form-select>
-    <b-button @click="evaluate"> Evaluate </b-button>
+    <b-form-select
+      class="moreSpace"
+      v-model="generation"
+      :options="options"
+    ></b-form-select>
+    <b-button class="moreSpace" @click="evaluate"> Evaluate </b-button>
   </div>
 </template>
 
@@ -57,3 +63,10 @@ async function evaluate() {
   evaluationReport.value = await evaluateTeam(team.value, generation.value);
 }
 </script>
+
+<style scoped>
+.moreSpace {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+</style>

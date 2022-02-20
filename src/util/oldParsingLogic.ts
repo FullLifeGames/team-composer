@@ -1,14 +1,17 @@
 import type { GenerationNum, Species } from "@pkmn/dex";
 import { Dex } from "@pkmn/dex";
 import translationUrl from "@/assets/pokemonTranslation.json?url";
-import draftMonsUrl from "@/assets/DraftMons.csv?url";
 
-export async function parseFile() {
-  let response = await fetch(translationUrl);
-  const translation = await response.json();
-  response = await fetch(draftMonsUrl);
-  const draftMons: string[][] = [[], [], [], [], []];
+export async function parseFile(draftMonsUrl: string) {
+  const response = await fetch(draftMonsUrl);
   const allText = await response.text();
+  return parseString(allText);
+}
+
+export async function parseString(allText: string) {
+  const draftMons: string[][] = [[], [], [], [], []];
+  const response = await fetch(translationUrl);
+  const translation = await response.json();
   const lines = allText.split("\n");
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
@@ -86,14 +89,21 @@ export async function parseFile() {
   }
 
   const monsList: string[][] = [];
+  const errors: string[] = [];
   for (let i = 0; i < draftMons.length; i++) {
     const currentTierList: string[] = [];
     for (let j = 0; j < draftMons[i].length; j++) {
       const pokemon = draftMons[i][j];
       const translatedPokemon = translatePokemon(pokemon);
+      if (translatedPokemon === undefined) {
+        errors.push(pokemon);
+      }
       currentTierList.push(translatedPokemon);
     }
     monsList.push(currentTierList);
+  }
+  if (errors.length > 0) {
+    throw String(errors);
   }
   return monsList;
 }
