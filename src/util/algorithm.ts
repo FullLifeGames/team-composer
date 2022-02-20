@@ -161,7 +161,7 @@ export async function calculateData(
     allSpecies,
     async (s) =>
       (await learnsets.canLearn(s.name, "Rapid Spin")) ||
-      (await learnsets.canLearn(s.name, "Defog")) ||
+      (generation >= 6 && (await learnsets.canLearn(s.name, "Defog"))) ||
       (await learnsets.canLearn(s.name, "Court Change"))
   );
   const otherHazards = await filter(
@@ -410,7 +410,7 @@ export async function generateTeam(
   };
 
   for (let i = 0; i < iterations; i++) {
-    const newTeam = [];
+    const newTeam: Species[][] = [];
     for (let j = 0; j < requirements.length; j++) {
       const currentRequirementSpecies: Species[] = [];
       const workingSpecies = species[j];
@@ -421,11 +421,13 @@ export async function generateTeam(
           foundMon = getRandomInt(workingSpecies.length);
           // Species Clause
           if (
-            !currentRequirementSpecies.some(
-              (s) =>
-                s.num === workingSpecies[foundMon].num ||
-                (s.name === "-Mega" &&
-                  workingSpecies[foundMon].name === "-Mega")
+            !newTeam.some((entryList) =>
+              entryList.some((s) =>
+                filterPokemonList(s, workingSpecies, foundMon)
+              )
+            ) &&
+            !currentRequirementSpecies.some((s) =>
+              filterPokemonList(s, workingSpecies, foundMon)
             )
           )
             break;
@@ -442,4 +444,16 @@ export async function generateTeam(
   }
 
   return [bestTeam, bestEvaluation];
+}
+
+function filterPokemonList(
+  value: Species,
+  workingSpecies: Species[],
+  foundMon: number
+): boolean {
+  return (
+    value.num === workingSpecies[foundMon].num ||
+    (value.name.includes("-Mega") &&
+      workingSpecies[foundMon].name.includes("-Mega"))
+  );
 }
