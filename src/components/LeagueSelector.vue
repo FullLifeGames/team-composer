@@ -18,6 +18,7 @@ import gplS6CSV from "@/assets/leagues/GPL_S6.csv?url";
 import gplS7CSV from "@/assets/leagues/GPL_S7.csv?url";
 import gplS8CSV from "@/assets/leagues/GPL_S8.csv?url";
 import npblS6CSV from "@/assets/leagues/NPBL_S6.csv?url";
+import pbaS2CSV from "@/assets/leagues/PBA_S2.csv?url";
 import pbaS3CSV from "@/assets/leagues/PBA_S3.csv?url";
 import rclCSV from "@/assets/leagues/RCL.csv?url";
 import smlCSV from "@/assets/leagues/SML.csv?url";
@@ -58,6 +59,12 @@ const leagues: League[] = [
     csv: npblS6CSV,
     generation: 8,
     requirements: [2, 2, 3, 2, 2],
+  },
+  {
+    displayName: "PBA S2",
+    csv: pbaS2CSV,
+    generation: 5,
+    requirements: [2, 3, 3, 3],
   },
   {
     displayName: "PBA S3",
