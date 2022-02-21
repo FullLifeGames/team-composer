@@ -381,9 +381,9 @@ export async function evaluateTeam(
       typeMatchupValue *
       // +2 since essential for Gen 4, Rest 1
       (algorithmState.rocker.length > 0 ? Math.log(rockers + 2) : 1) *
-      // +2 since essential for Gen 6 >=, otherwise +3
+      // +2 since essential for Gen 6 >=, otherwise +6
       (algorithmState.hazardRemover.length > 0
-        ? Math.log(hazardRemovals + (algorithmState.generation >= 6 ? 3 : 2))
+        ? Math.log(hazardRemovals + (algorithmState.generation >= 6 ? 2 : 6))
         : 1) *
       // +3 since not essential
       (algorithmState.otherHazards.length > 0
