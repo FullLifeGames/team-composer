@@ -5,8 +5,8 @@
     <br />
     <p>
       If you are running a draft league, you can contact
-      <a href="mailto:bene@fulllifegames">bene@fulllifegames</a> to add your
-      league into this website.
+      <a href="mailto:bene@fulllifegames.com">bene@fulllifegames.com</a> to add
+      your league into this website.
     </p>
     <p>
       The application should contain a working German CSV file, the targeted
