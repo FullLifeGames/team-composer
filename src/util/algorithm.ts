@@ -423,7 +423,10 @@ export async function generateTeam(
       const workingSpecies = species[j];
       for (let k = 0; k < requirements[j]; k++) {
         if (filterList[j] && filterList[j][k]) {
-          currentRequirementSpecies.push(filterList[j][k]!);
+          const fixedSpecies = filterList[j][k];
+          if (fixedSpecies) {
+            currentRequirementSpecies.push(fixedSpecies);
+          }
         } else {
           const numberOfTries = 100;
           let foundMon = 0;

@@ -43,12 +43,14 @@ watch(file1, () => {
   if (file1.value !== null) {
     const reader = new FileReader();
     reader.addEventListener("load", async (event) => {
-      try {
-        const result = await parseString(event!.target!.result as string);
-        stringsToSpecies(8, result);
-        report.value = "Works!";
-      } catch (e) {
-        report.value = "Broken: " + String(e);
+      if (event && event.target) {
+        try {
+          const result = await parseString(event.target.result as string);
+          stringsToSpecies(8, result);
+          report.value = "Works!";
+        } catch (e) {
+          report.value = "Broken: " + String(e);
+        }
       }
     });
     reader.readAsText(file1.value);

@@ -24,6 +24,13 @@ import rclCSV from "@/assets/leagues/RCL.csv?url";
 import smlCSV from "@/assets/leagues/SML.csv?url";
 import router from "@/router";
 
+let initalLeagueObject: League = {
+  displayName: "GPL S8",
+  csv: gplS8CSV,
+  generation: 8,
+  requirements: [2, 2, 3, 2, 2],
+};
+
 const leagues: League[] = [
   {
     displayName: "BRL S2",
@@ -49,12 +56,7 @@ const leagues: League[] = [
     generation: 8,
     requirements: [2, 3, 3, 3],
   },
-  {
-    displayName: "GPL S8",
-    csv: gplS8CSV,
-    generation: 8,
-    requirements: [2, 2, 3, 2, 2],
-  },
+  initalLeagueObject,
   {
     displayName: "NPBL S6",
     csv: npblS6CSV,
@@ -92,29 +94,33 @@ const emit = defineEmits<{
 }>();
 
 const leagueParam = router.currentRoute.params.league;
-let initalLeague = "GPL S8";
-if (
-  leagueParam &&
-  leagues.find((league) => league.displayName === leagueParam)
-) {
-  initalLeague = leagueParam;
+if (leagueParam) {
+  const paramLeagueObject = leagues.find(
+    (league) => league.displayName === leagueParam
+  );
+  if (paramLeagueObject) {
+    initalLeagueObject = paramLeagueObject;
+  }
 } else {
-  router.replace({ name: "League", params: { league: initalLeague } });
+  router.replace({
+    name: "League",
+    params: { league: initalLeagueObject.displayName },
+  });
 }
-const selectedLeague = ref(
-  leagues.find((league) => league.displayName === initalLeague)!.displayName
-);
+const selectedLeague = ref(initalLeagueObject.displayName);
 
-emit(
-  "change",
-  leagues.find((league) => league.displayName === selectedLeague.value)!
-);
+emit("change", initalLeagueObject);
 
 watch(selectedLeague, () => {
-  router.replace({ name: "League", params: { league: selectedLeague.value } });
-  emit(
-    "change",
-    leagues.find((league) => league.displayName === selectedLeague.value)!
+  const selectedLeagueObject = leagues.find(
+    (league) => league.displayName === selectedLeague.value
   );
+  if (selectedLeagueObject) {
+    router.replace({
+      name: "League",
+      params: { league: selectedLeagueObject.displayName },
+    });
+    emit("change", selectedLeagueObject);
+  }
 });
 </script>
