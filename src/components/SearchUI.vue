@@ -15,7 +15,9 @@
         </b-form-select>
       </b-col>
     </b-row>
-    <b-button class="spacedElement" @click="setFilter"> Reset Search </b-button>
+    <b-button class="spacedElement" @click="resetFilter">
+      Reset Search
+    </b-button>
   </div>
 </template>
 
@@ -55,6 +57,11 @@ setFilter();
 
 function changeFilter() {
   emit("changeFilter", filter.value);
+}
+
+function resetFilter() {
+  setFilter();
+  changeFilter();
 }
 </script>
 
