@@ -405,6 +405,7 @@ export async function generateTeam(
   generation: GenerationNum,
   species: Species[][],
   requirements: number[],
+  filterList: (Species | null)[][] = [],
   algorithmState?: AlgorithmState,
   iterations = 1000
 ): Promise<[Species[][], EvaluationReport]> {
@@ -421,24 +422,28 @@ export async function generateTeam(
       const currentRequirementSpecies: Species[] = [];
       const workingSpecies = species[j];
       for (let k = 0; k < requirements[j]; k++) {
-        const numberOfTries = 100;
-        let foundMon = 0;
-        for (let l = 0; l < numberOfTries; l++) {
-          foundMon = getRandomInt(workingSpecies.length);
-          // Species Clause
-          if (
-            !newTeam.some((entryList) =>
-              entryList.some((s) =>
+        if (filterList[j] && filterList[j][k]) {
+          currentRequirementSpecies.push(filterList[j][k]!);
+        } else {
+          const numberOfTries = 100;
+          let foundMon = 0;
+          for (let l = 0; l < numberOfTries; l++) {
+            foundMon = getRandomInt(workingSpecies.length);
+            // Species Clause
+            if (
+              !newTeam.some((entryList) =>
+                entryList.some((s) =>
+                  filterPokemonList(s, workingSpecies, foundMon)
+                )
+              ) &&
+              !currentRequirementSpecies.some((s) =>
                 filterPokemonList(s, workingSpecies, foundMon)
               )
-            ) &&
-            !currentRequirementSpecies.some((s) =>
-              filterPokemonList(s, workingSpecies, foundMon)
             )
-          )
-            break;
+              break;
+          }
+          currentRequirementSpecies.push(workingSpecies[foundMon]);
         }
-        currentRequirementSpecies.push(workingSpecies[foundMon]);
       }
       newTeam.push(currentRequirementSpecies);
     }

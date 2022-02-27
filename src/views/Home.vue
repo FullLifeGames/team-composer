@@ -9,7 +9,11 @@
       :team="team"
     />
     <b-button @click="generate"> Generate </b-button>
-    <SearchUI />
+    <SearchUI
+      class="spacedElement"
+      :league="league"
+      @changeFilter="changeFilter"
+    />
   </div>
 </template>
 
@@ -21,7 +25,6 @@ import { generateTeam } from "@/util/algorithm";
 
 import { parseFile, stringsToSpecies } from "@/util/oldParsingLogic";
 import { League } from "@/types/league";
-import router from "@/router";
 
 const league = ref({
   csv: "",
@@ -34,6 +37,8 @@ const team: Ref<Species[][]> = ref([]);
 const loading = ref(false);
 const evaluationReport: Ref<EvaluationReport> = ref({ value: 0 });
 
+const filter = ref([] as (Species | null)[][]);
+
 async function generate() {
   loading.value = true;
   const parsedMons = await parseFile(league.value.csv);
@@ -41,13 +46,19 @@ async function generate() {
   const result = await generateTeam(
     league.value.generation,
     stringsToSpecies(league.value.generation, parsedMons),
-    league.value.requirements
+    league.value.requirements,
+    filter.value
   );
   // eslint-disable-next-line no-console
   console.log(result);
   team.value = result[0];
   evaluationReport.value = result[1];
   loading.value = false;
+}
+
+function changeFilter(changedFilter: (Species | null)[][]) {
+  filter.value = changedFilter;
+  generate();
 }
 
 function changeDraftMonsUrl(newLeague: League) {
