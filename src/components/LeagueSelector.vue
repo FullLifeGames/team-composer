@@ -22,6 +22,7 @@ import pbaS2CSV from "@/assets/leagues/PBA_S2.csv?url";
 import pbaS3CSV from "@/assets/leagues/PBA_S3.csv?url";
 import rclCSV from "@/assets/leagues/RCL.csv?url";
 import smlCSV from "@/assets/leagues/SML.csv?url";
+import router from "@/router";
 
 const leagues: League[] = [
   {
@@ -90,8 +91,18 @@ const emit = defineEmits<{
   (e: "change", league: League): void;
 }>();
 
+const leagueParam = router.currentRoute.params.league;
+let initalLeague = "GPL S8";
+if (
+  leagueParam &&
+  leagues.find((league) => league.displayName === leagueParam)
+) {
+  initalLeague = leagueParam;
+} else {
+  router.replace({ name: "League", params: { league: initalLeague } });
+}
 const selectedLeague = ref(
-  leagues.find((league) => league.displayName === "GPL S8")!.displayName
+  leagues.find((league) => league.displayName === initalLeague)!.displayName
 );
 
 emit(
@@ -100,6 +111,7 @@ emit(
 );
 
 watch(selectedLeague, () => {
+  router.replace({ name: "League", params: { league: selectedLeague.value } });
   emit(
     "change",
     leagues.find((league) => league.displayName === selectedLeague.value)!

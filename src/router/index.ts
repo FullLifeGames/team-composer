@@ -18,6 +18,15 @@ export const routes: RouteConfig[] = [
     // component: () => import("@/views/About.vue")
   },
   {
+    path: "/league/:league",
+    name: "League",
+    // NOTE: you can also apply meta information
+    // meta: {authRequired: false }
+    component: Home,
+    // NOTE: you can also lazy-load the component
+    // component: () => import("@/views/About.vue")
+  },
+  {
     path: "/team-evaluator",
     name: "TeamEvaluator",
     // NOTE: you can also apply meta information

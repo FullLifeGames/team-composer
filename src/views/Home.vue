@@ -21,6 +21,7 @@ import { generateTeam } from "@/util/algorithm";
 
 import { parseFile, stringsToSpecies } from "@/util/oldParsingLogic";
 import { League } from "@/types/league";
+import router from "@/router";
 
 const league = ref({
   csv: "",
