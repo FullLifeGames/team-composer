@@ -21,6 +21,15 @@
         </b-navbar-nav>
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto navbarImage">
+          <b-nav-item href="https://www.youtube.com/user/FullLifeGames"
+            ><BIconYoutube
+          /></b-nav-item>
+          <b-nav-item href="https://twitter.com/fulllifegames"
+            ><BIconTwitter
+          /></b-nav-item>
+          <b-nav-item href="https://github.com/FullLifeGames/team-composer"
+            ><BIconGithub
+          /></b-nav-item>
           <b-nav-item href="https://fulllifegames.com"
             ><img
               class="img-fluid img-profile rounded-circle mx-auto mb-2 navbarImage"
