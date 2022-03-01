@@ -36,12 +36,14 @@ const allSpecies = generationDex.species
   .all()
   .filter((species) => species.exists)
   .sort();
-const allSpeciesOptions = allSpecies.map((species) => {
-  return {
-    name: species.name,
-    species: species,
-  };
-});
+const allSpeciesOptions = computed(() =>
+  allSpecies.map((species) => {
+    return {
+      name: species.name,
+      species: species,
+    };
+  })
+);
 const filter = ref([] as (Species | null)[][]);
 function setFilter() {
   filter.value = [];

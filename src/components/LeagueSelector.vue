@@ -2,9 +2,9 @@
   <div>
     <b-form-select
       v-model="selectedLeague"
-      :options="leagues"
-      text-field="displayName"
-      value-field="displayName"
+      :options="leaguesOptions"
+      text-field="name"
+      value-field="league"
     ></b-form-select>
   </div>
 </template>
@@ -89,6 +89,15 @@ const leagues: League[] = [
   },
 ];
 
+const leaguesOptions = computed(() =>
+  leagues.map((league) => {
+    return {
+      name: `${league.displayName} (Gen ${league.generation})`,
+      league: league,
+    };
+  })
+);
+
 const emit = defineEmits<{
   (e: "change", league: League): void;
 }>();
@@ -107,20 +116,17 @@ if (leagueParam) {
     params: { league: initalLeagueObject.displayName },
   });
 }
-const selectedLeague = ref(initalLeagueObject.displayName);
+const selectedLeague = ref(initalLeagueObject);
 
 emit("change", initalLeagueObject);
 
 watch(selectedLeague, () => {
-  const selectedLeagueObject = leagues.find(
-    (league) => league.displayName === selectedLeague.value
-  );
-  if (selectedLeagueObject) {
+  if (selectedLeague) {
     router.replace({
       name: "League",
-      params: { league: selectedLeagueObject.displayName },
+      params: { league: selectedLeague.value.displayName },
     });
-    emit("change", selectedLeagueObject);
+    emit("change", selectedLeague.value);
   }
 });
 </script>
