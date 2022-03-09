@@ -5,5 +5,6 @@ export interface League {
   csv: string;
   generation: GenerationNum;
   requirements: number[];
+  language: "en" | "de";
   doubles?: boolean;
 }

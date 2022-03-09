@@ -3,7 +3,7 @@
     <TeamRenderer
       v-if="team.length > 0"
       :evaluation-report="evaluationReport"
-      :generation="generation"
+      :league="league"
       :loading="false"
       :team="team"
     />
@@ -29,6 +29,7 @@ import { Sets } from "@pkmn/sets";
 import type { Ref } from "@vue/composition-api";
 import type { EvaluationReport } from "@/util/algorithm";
 import { evaluateTeam } from "@/util/algorithm";
+import { League } from "@/types/league";
 
 const currentGen = 8;
 
@@ -44,6 +45,10 @@ const team: Ref<Species[][]> = ref([]);
 const evaluationReport: Ref<EvaluationReport> = ref({ value: 0 });
 
 const teamDefinition = ref("");
+
+const league = ref({
+  generation: generation.value,
+} as League);
 
 const splitter = 3;
 

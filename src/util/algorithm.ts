@@ -1,4 +1,10 @@
-import type { GenerationNum, Species, StatsTable, Type } from "@pkmn/dex";
+import type {
+  GenerationNum,
+  Species,
+  StatsTable,
+  Type,
+  TypeName,
+} from "@pkmn/dex";
 import { Dex } from "@pkmn/dex";
 import type { Types as DataTypes } from "@pkmn/data";
 import { Generations } from "@pkmn/data";
@@ -85,7 +91,12 @@ export interface EvaluationReport {
   otherHazards?: number;
   ownTypesCovered?: number;
   typeMatchupValue?: number;
+  typeMatchups?: {
+    name: TypeName;
+    value: number;
+  }[];
   momentumUser?: number;
+
   quickGuardUser?: number;
   wideGuardUser?: number;
   fakeOutUser?: number;
@@ -422,6 +433,7 @@ export async function evaluateTeam(
     evaluationReport.hazardRemovals = hazardRemovals;
     evaluationReport.otherHazards = otherHazards;
     evaluationReport.ownTypesCovered = ownTypesCovered;
+    evaluationReport.typeMatchups = typeMatchups;
     evaluationReport.typeMatchupValue = typeMatchupValue;
     evaluationReport.momentumUser = momentumUser;
 

@@ -46,6 +46,22 @@
             >Type Matchup Value:
             {{ props.evaluationReport.typeMatchupValue }}</b-list-group-item
           >
+          <b-list-group-item>
+            <b-button v-b-toggle.collapse-3 class="m-1">Type Matchups</b-button>
+            <b-collapse id="collapse-3">
+              <b-card>
+                <b-list-group>
+                  <b-list-group-item
+                    v-for="(typeMatchup, id) in props.evaluationReport
+                      .typeMatchups"
+                    :key="id"
+                  >
+                    {{ typeMatchup.name }} || {{ typeMatchup.value }}
+                  </b-list-group-item>
+                </b-list-group>
+              </b-card>
+            </b-collapse></b-list-group-item
+          >
           <b-list-group-item
             >Own Type Value:
             {{ props.evaluationReport.ownTypesCovered }}</b-list-group-item

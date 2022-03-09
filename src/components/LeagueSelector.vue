@@ -29,6 +29,7 @@ let initalLeagueObject: League = {
   csv: gplS8CSV,
   generation: 8,
   requirements: [2, 2, 3, 2, 2],
+  language: "de",
 };
 
 const leagues: League[] = [
@@ -37,24 +38,28 @@ const leagues: League[] = [
     csv: brlS2CSV,
     generation: 4,
     requirements: [3, 4, 4],
+    language: "de",
   },
   {
     displayName: "GPL S5",
     csv: gplS5CSV,
     generation: 7,
     requirements: [2, 2, 3, 2, 2],
+    language: "de",
   },
   {
     displayName: "GPL S6",
     csv: gplS6CSV,
     generation: 7,
     requirements: [2, 2, 3, 2, 2],
+    language: "de",
   },
   {
     displayName: "GPL S7",
     csv: gplS7CSV,
     generation: 8,
     requirements: [2, 3, 3, 3],
+    language: "de",
   },
   initalLeagueObject,
   {
@@ -62,30 +67,35 @@ const leagues: League[] = [
     csv: npblS6CSV,
     generation: 8,
     requirements: [2, 2, 3, 2, 2],
+    language: "de",
   },
   {
     displayName: "PBA S2",
     csv: pbaS2CSV,
     generation: 5,
     requirements: [2, 3, 3, 3],
+    language: "de",
   },
   {
     displayName: "PBA S3",
     csv: pbaS3CSV,
     generation: 6,
     requirements: [2, 3, 3, 3],
+    language: "de",
   },
   {
     displayName: "RCL",
     csv: rclCSV,
     generation: 8,
     requirements: [2, 3, 3, 3],
+    language: "de",
   },
   {
     displayName: "SML",
     csv: smlCSV,
     generation: 8,
     requirements: [3, 3, 3, 3],
+    language: "de",
   },
 ];
 

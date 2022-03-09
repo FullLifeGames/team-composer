@@ -108,6 +108,18 @@ export async function parseString(allText: string) {
   return monsList;
 }
 
+export async function rawCSVFileToMonsList(csvFile: string) {
+  const response = await fetch(csvFile);
+  const allText = await response.text();
+  return rawCSVToMonsList(allText);
+}
+
+export function rawCSVToMonsList(csv: string): string[][] {
+  return csv
+    .split("\n")
+    .map((row) => row.split("\t\t").filter((entry) => entry.trim() !== ""));
+}
+
 export function stringsToSpecies(
   generation: GenerationNum,
   monsList: string[][]
