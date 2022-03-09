@@ -4,7 +4,7 @@
     <TeamRenderer
       class="spacedElement"
       :evaluation-report="evaluationReport"
-      :generation="league.generation"
+      :league="league"
       :loading="loading"
       :team="team"
     />
@@ -47,7 +47,9 @@ async function generate() {
     league.value.generation,
     stringsToSpecies(league.value.generation, parsedMons),
     league.value.requirements,
-    filter.value
+    filter.value,
+    undefined,
+    league.value.doubles
   );
   // eslint-disable-next-line no-console
   console.log(result);

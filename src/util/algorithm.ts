@@ -68,6 +68,12 @@ export interface AlgorithmState {
   abilityBooster: AbilityBooster[];
 
   momentumUser: Species[];
+
+  quickGuardUser: Species[];
+  wideGuardUser: Species[];
+  fakeOutUser: Species[];
+  tailwindUser: Species[];
+  intimidateUser: Species[];
 }
 
 export interface EvaluationReport {
@@ -80,6 +86,11 @@ export interface EvaluationReport {
   ownTypesCovered?: number;
   typeMatchupValue?: number;
   momentumUser?: number;
+  quickGuardUser?: number;
+  wideGuardUser?: number;
+  fakeOutUser?: number;
+  tailwindUser?: number;
+  intimidateUser?: number;
 }
 
 export async function calculateData(
@@ -180,6 +191,23 @@ export async function calculateData(
       (await learnsets.canLearn(s.name, "Flip Turn")) ||
       (generation >= 8 && (await learnsets.canLearn(s.name, "Teleport")))
   );
+  const quickGuardUser = await filter(
+    allSpecies,
+    async (s) => await learnsets.canLearn(s.name, "Quick Guard")
+  );
+  const wideGuardUser = await filter(
+    allSpecies,
+    async (s) => await learnsets.canLearn(s.name, "Wide Guard")
+  );
+  const fakeOutUser = await filter(
+    allSpecies,
+    async (s) => await learnsets.canLearn(s.name, "Fake Out")
+  );
+  const tailwindUser = await filter(
+    allSpecies,
+    async (s) => await learnsets.canLearn(s.name, "Tailwind")
+  );
+  const intimidateUser = getAbilityMons(allSpecies, ["Intimidate"]);
 
   const sunSetter = getAbilityMons(allSpecies, sunAbilities);
   const rainSetter = getAbilityMons(allSpecies, rainAbilities);
@@ -227,12 +255,19 @@ export async function calculateData(
     abilityBooster,
 
     momentumUser,
+
+    quickGuardUser,
+    wideGuardUser,
+    fakeOutUser,
+    tailwindUser,
+    intimidateUser,
   } as AlgorithmState;
 }
 
 export async function evaluateTeam(
   teamPokemon: Species[] | Species[][],
-  algorithmState: AlgorithmState | GenerationNum
+  algorithmState: AlgorithmState | GenerationNum,
+  doubles?: boolean
 ): Promise<EvaluationReport> {
   if (typeof algorithmState === "number")
     algorithmState = await calculateData(algorithmState);
@@ -272,6 +307,21 @@ export async function evaluateTeam(
     const typeExists = algorithmState.types.map((type) => {
       return { name: type.name, value: 0 };
     });
+    const quickGuardUser = algorithmState.quickGuardUser.filter((s) =>
+      mergedTeam.includes(s)
+    ).length;
+    const wideGuardUser = algorithmState.wideGuardUser.filter((s) =>
+      mergedTeam.includes(s)
+    ).length;
+    const fakeOutUser = algorithmState.fakeOutUser.filter((s) =>
+      mergedTeam.includes(s)
+    ).length;
+    const tailwindUser = algorithmState.tailwindUser.filter((s) =>
+      mergedTeam.includes(s)
+    ).length;
+    const intimidateUser = algorithmState.intimidateUser.filter((s) =>
+      mergedTeam.includes(s)
+    ).length;
 
     let statValue = 0;
 
@@ -375,23 +425,51 @@ export async function evaluateTeam(
     evaluationReport.typeMatchupValue = typeMatchupValue;
     evaluationReport.momentumUser = momentumUser;
 
+    evaluationReport.quickGuardUser = quickGuardUser;
+    evaluationReport.wideGuardUser = wideGuardUser;
+    evaluationReport.fakeOutUser = fakeOutUser;
+    evaluationReport.tailwindUser = tailwindUser;
+    evaluationReport.intimidateUser = intimidateUser;
+
     evaluationReport.value =
       statValue *
       // If balanced, should be around 1
       typeMatchupValue *
       // +2 since essential for Gen 4, Rest 1
-      (algorithmState.rocker.length > 0 ? Math.log(rockers + 2) : 1) *
+      (algorithmState.rocker.length > 0 ? Math.log(rockers + 6) : 1) *
       // +2 since essential for Gen 6 >=, otherwise +6
       (algorithmState.hazardRemover.length > 0
-        ? Math.log(hazardRemovals + (algorithmState.generation >= 6 ? 2 : 6))
+        ? Math.log(hazardRemovals + (algorithmState.generation >= 6 ? 6 : 6))
         : 1) *
       // +3 since not essential
       (algorithmState.otherHazards.length > 0
-        ? Math.log(otherHazards + 3)
+        ? Math.log(otherHazards + 10)
         : 1) *
       // +3 since not essential
       (algorithmState.momentumUser.length > 0
         ? Math.log(momentumUser + 3)
+        : 1) *
+      (doubles
+        ? // +3 since not essential
+          (algorithmState.quickGuardUser.length > 0
+            ? Math.log(quickGuardUser + 3)
+            : 1) *
+          // +3 since not essential
+          (algorithmState.wideGuardUser.length > 0
+            ? Math.log(wideGuardUser + 3)
+            : 1) *
+          // +3 since not essential
+          (algorithmState.fakeOutUser.length > 0
+            ? Math.log(fakeOutUser + 3)
+            : 1) *
+          // +3 since not essential
+          (algorithmState.tailwindUser.length > 0
+            ? Math.log(tailwindUser + 3)
+            : 1) *
+          // +3 since not essential
+          (algorithmState.intimidateUser.length > 0
+            ? Math.log(intimidateUser + 3)
+            : 1)
         : 1) *
       // Can only reduce, since max is 1
       ownTypesCovered;
@@ -407,6 +485,7 @@ export async function generateTeam(
   requirements: number[],
   filterList: (Species | null)[][] = [],
   algorithmState?: AlgorithmState,
+  doubles?: boolean,
   iterations = 1000
 ): Promise<[Species[][], EvaluationReport]> {
   if (!algorithmState) algorithmState = await calculateData(generation);
@@ -450,7 +529,7 @@ export async function generateTeam(
       }
       newTeam.push(currentRequirementSpecies);
     }
-    const teamEvaluation = await evaluateTeam(newTeam, algorithmState);
+    const teamEvaluation = await evaluateTeam(newTeam, algorithmState, doubles);
     if (teamEvaluation.value > bestEvaluation.value) {
       bestEvaluation = teamEvaluation;
       bestTeam = newTeam;

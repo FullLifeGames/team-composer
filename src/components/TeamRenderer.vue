@@ -12,7 +12,7 @@
         <div v-for="(line, key) of props.team" :key="key">
           <b-row align-h="center" class="smallBottom">
             <b-col v-for="mon of line" :key="mon.num" align-self="center">
-              <MonRenderer :generation="props.generation" :mon="mon" />
+              <MonRenderer :generation="props.league.generation" :mon="mon" />
             </b-col>
           </b-row>
           <b-row class="smallBottom">
@@ -54,6 +54,26 @@
             >Momentum User:
             {{ props.evaluationReport.momentumUser }}</b-list-group-item
           >
+          <b-list-group-item v-if="props.league.doubles"
+            >Quick Guard User:
+            {{ props.evaluationReport.quickGuardUser }}</b-list-group-item
+          >
+          <b-list-group-item v-if="props.league.doubles"
+            >Wide Guard User:
+            {{ props.evaluationReport.wideGuardUser }}</b-list-group-item
+          >
+          <b-list-group-item v-if="props.league.doubles"
+            >Fake Out User:
+            {{ props.evaluationReport.fakeOutUser }}</b-list-group-item
+          >
+          <b-list-group-item v-if="props.league.doubles"
+            >Tailwind User:
+            {{ props.evaluationReport.tailwindUser }}</b-list-group-item
+          >
+          <b-list-group-item v-if="props.league.doubles"
+            >Intimidate User:
+            {{ props.evaluationReport.intimidateUser }}</b-list-group-item
+          >
         </b-list-group>
       </b-col>
     </b-row>
@@ -61,11 +81,12 @@
 </template>
 
 <script setup lang="ts">
-import type { GenerationNum, Species } from "@pkmn/dex";
+import type { Species } from "@pkmn/dex";
 import type { EvaluationReport } from "@/util/algorithm";
+import type { League } from "@/types/league";
 const props = defineProps<{
   evaluationReport: EvaluationReport;
-  generation: GenerationNum;
+  league: League;
   team: Species[][];
   loading: boolean;
 }>();
