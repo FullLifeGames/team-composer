@@ -1,4 +1,4 @@
-import type { Move } from "@pkmn/data";
+import type { Ability, Move } from "@pkmn/data";
 import type { Type } from "@pkmn/dex";
 
 export interface MonFilterOption {
@@ -6,4 +6,5 @@ export interface MonFilterOption {
   filterMove: ?Move;
   filterType1: ?Type;
   filterType2: ?Type;
+  filterAbility: ?Ability;
 }

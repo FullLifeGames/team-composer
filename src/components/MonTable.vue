@@ -92,6 +92,13 @@ async function filterSpeciesArray(speciesList: Species[]) {
         props.monFilterOption.filterType2.name
       );
     }
+    if (filterResult && props.monFilterOption.filterAbility) {
+      filterResult =
+        props.monFilterOption.filterAbility.name === entry.abilities[0] ||
+        props.monFilterOption.filterAbility.name === entry.abilities[1] ||
+        props.monFilterOption.filterAbility.name === entry.abilities.H ||
+        props.monFilterOption.filterAbility.name === entry.abilities.S;
+    }
     return filterResult;
   });
 }
