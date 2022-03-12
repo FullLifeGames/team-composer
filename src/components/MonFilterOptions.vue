@@ -52,7 +52,7 @@
         value-field="ability"
       >
         <b-form-select-option :value="null"
-          >Select a ability to filter</b-form-select-option
+          >Select an ability to filter</b-form-select-option
         >
       </b-form-select>
     </b-form-group>
