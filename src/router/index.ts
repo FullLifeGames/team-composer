@@ -1,7 +1,7 @@
 import Vue from "vue";
 import type { RouteConfig } from "vue-router";
 import VueRouter from "vue-router";
-import Home from "@/views/Home.vue";
+import TeamGenerator from "@/views/TeamGenerator.vue";
 import MonFilter from "@/views/MonFilter.vue";
 import TeamEvaluator from "@/views/TeamEvaluator.vue";
 import DraftLeagueApplication from "@/views/DraftLeagueApplication.vue";
@@ -11,10 +11,10 @@ Vue.use(VueRouter);
 export const routes: RouteConfig[] = [
   {
     path: "/",
-    name: "Home",
+    name: "TeamGenerator",
     // NOTE: you can also apply meta information
     // meta: {authRequired: false }
-    component: Home,
+    component: TeamGenerator,
     // NOTE: you can also lazy-load the component
     // component: () => import("@/views/About.vue")
   },
@@ -23,12 +23,12 @@ export const routes: RouteConfig[] = [
     name: "League",
     // NOTE: you can also apply meta information
     // meta: {authRequired: false }
-    component: Home,
+    component: TeamGenerator,
     // NOTE: you can also lazy-load the component
     // component: () => import("@/views/About.vue")
   },
   {
-    path: "/mon-filter/",
+    path: "/mon-filter",
     name: "MonFilterStart",
     // NOTE: you can also apply meta information
     // meta: {authRequired: false }

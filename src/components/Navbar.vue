@@ -9,17 +9,33 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <router-link to="/" custom v-slot="{ href }">
-            <b-nav-item :href="href">Home</b-nav-item>
+          <router-link to="/" custom v-slot="{ href, isExactActive }">
+            <b-nav-item :href="href" :active="isExactActive"
+              >Team Generator</b-nav-item
+            >
           </router-link>
-          <router-link to="/mon-filter" custom v-slot="{ href }">
-            <b-nav-item :href="href">Pokémon Filter</b-nav-item>
+          <router-link to="/mon-filter" custom v-slot="{ href, isExactActive }">
+            <b-nav-item :href="href" :active="isExactActive"
+              >Pokémon Filter</b-nav-item
+            >
           </router-link>
-          <router-link to="/team-evaluator" custom v-slot="{ href }">
-            <b-nav-item :href="href">Team Evaluator</b-nav-item>
+          <router-link
+            to="/team-evaluator"
+            custom
+            v-slot="{ href, isExactActive }"
+          >
+            <b-nav-item :href="href" :active="isExactActive"
+              >Team Evaluator</b-nav-item
+            >
           </router-link>
-          <router-link to="/draft-league-application" custom v-slot="{ href }">
-            <b-nav-item :href="href">Draft League Application</b-nav-item>
+          <router-link
+            to="/draft-league-application"
+            custom
+            v-slot="{ href, isExactActive }"
+          >
+            <b-nav-item :href="href" :active="isExactActive"
+              >Draft League Application</b-nav-item
+            >
           </router-link>
         </b-navbar-nav>
         <!-- Right aligned nav items -->

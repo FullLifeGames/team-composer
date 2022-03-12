@@ -40,30 +40,37 @@ const evaluationReport: Ref<EvaluationReport> = ref({ value: 0 });
 
 const filter = ref([] as (Species | null)[][]);
 
+const parsedMons = ref([] as string[][]);
+const species = ref([] as Species[][]);
+
+async function getData() {
+  loading.value = true;
+
+  if (league.value.language === "de") {
+    parsedMons.value = await parseFile(league.value.csv);
+  } else {
+    parsedMons.value = await rawCSVFileToMonsList(league.value.csv);
+  }
+  species.value = stringsToSpecies(league.value.generation, parsedMons.value);
+  await generate();
+
+  loading.value = false;
+}
+
 async function generate() {
   loading.value = true;
 
-  let parsedMons = [];
-  if (league.value.language === "de") {
-    parsedMons = await parseFile(league.value.csv);
-  } else {
-    parsedMons = await rawCSVFileToMonsList(league.value.csv);
-  }
-  console.log(parsedMons);
-  const species = stringsToSpecies(league.value.generation, parsedMons);
-
   const result = await generateTeam(
     league.value.generation,
-    species,
+    species.value,
     league.value.requirements,
     filter.value,
     undefined,
     league.value.doubles
   );
-  // eslint-disable-next-line no-console
-  console.log(result);
   team.value = result[0];
   evaluationReport.value = result[1];
+
   loading.value = false;
 }
 
@@ -74,7 +81,7 @@ function changeFilter(changedFilter: (Species | null)[][]) {
 
 function changeDraftMonsUrl(newLeague: League) {
   league.value = newLeague;
-  generate();
+  getData();
 }
 </script>
 

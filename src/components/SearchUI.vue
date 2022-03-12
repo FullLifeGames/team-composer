@@ -31,13 +31,15 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: "changeFilter", filter: (Species | null)[][]): void;
 }>();
-const generationDex = Dex.forGen(props.league.generation);
-const allSpecies = generationDex.species
-  .all()
-  .filter((species) => species.exists)
-  .sort();
+const generationDex = computed(() => Dex.forGen(props.league.generation));
+const allSpecies = computed(() =>
+  generationDex.value.species
+    .all()
+    .filter((species) => species.exists)
+    .sort()
+);
 const allSpeciesOptions = computed(() =>
-  allSpecies.map((species) => {
+  allSpecies.value.map((species) => {
     return {
       name: species.name,
       species: species,
