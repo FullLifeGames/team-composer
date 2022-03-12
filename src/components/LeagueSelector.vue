@@ -17,6 +17,7 @@ import gplS5CSV from "@/assets/leagues/GPL_S5.csv?url";
 import gplS6CSV from "@/assets/leagues/GPL_S6.csv?url";
 import gplS7CSV from "@/assets/leagues/GPL_S7.csv?url";
 import gplS8CSV from "@/assets/leagues/GPL_S8.csv?url";
+import miniHKPCSV from "@/assets/leagues/Mini-HKP.csv?url";
 import npblS6CSV from "@/assets/leagues/NPBL_S6.csv?url";
 import pbaS2CSV from "@/assets/leagues/PBA_S2.csv?url";
 import pbaS3CSV from "@/assets/leagues/PBA_S3.csv?url";
@@ -69,6 +70,13 @@ const leagues: League[] = [
     language: "de",
   },
   initalLeagueObject,
+  {
+    displayName: "Mini-KHP",
+    csv: miniHKPCSV,
+    generation: 3,
+    requirements: [2, 3, 3, 3],
+    language: "de",
+  },
   {
     displayName: "NPBL S6",
     csv: npblS6CSV,
