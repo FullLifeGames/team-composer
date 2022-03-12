@@ -35,8 +35,7 @@ const props = defineProps<{
 }>();
 
 const gens = new Generations(Dex);
-const generationData = gens.get(props.league.generation);
-const learnsets = generationData.learnsets;
+const generationData = computed(() => gens.get(props.league.generation));
 
 const stringFilter = computed(() => {
   if (props.monFilterOption.filter) {
@@ -77,7 +76,7 @@ async function filterSpeciesArray(speciesList: Species[]) {
       filterResult = entry.name.toLowerCase().includes(stringFilter.value);
     }
     if (filterResult && props.monFilterOption.filterMove) {
-      filterResult = await learnsets.canLearn(
+      filterResult = await generationData.value.learnsets.canLearn(
         entry.name,
         props.monFilterOption.filterMove
       );

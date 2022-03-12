@@ -89,7 +89,7 @@ const emit = defineEmits<{
   (e: "change", filterOptions: MonFilterOption): void;
 }>();
 
-const generationDex = Dex.forGen(props.league.generation);
+const generationDex = computed(() => Dex.forGen(props.league.generation));
 
 const filterMove = ref(null as Move | null);
 
@@ -99,7 +99,7 @@ const filterType2 = ref(null as Type | null);
 const filterAbility = ref(null as Ability | null);
 
 const moves = computed(() => {
-  return generationDex.moves.all().map((move) => {
+  return generationDex.value.moves.all().map((move) => {
     return {
       move: move,
       name: move.name,
@@ -108,7 +108,7 @@ const moves = computed(() => {
 });
 
 const types = computed(() => {
-  return generationDex.types.all().map((type) => {
+  return generationDex.value.types.all().map((type) => {
     return {
       type: type,
       name: type.name,
@@ -117,7 +117,7 @@ const types = computed(() => {
 });
 
 const abilities = computed(() => {
-  return generationDex.abilities.all().map((ability) => {
+  return generationDex.value.abilities.all().map((ability) => {
     return {
       ability: ability,
       name: ability.name,
