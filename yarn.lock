@@ -2371,7 +2371,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:^3.2.11, fast-glob@npm:^3.2.9":
+"fast-glob@npm:^3.2.11, fast-glob@npm:^3.2.7, fast-glob@npm:^3.2.9":
   version: 3.2.11
   resolution: "fast-glob@npm:3.2.11"
   dependencies:
@@ -3984,7 +3984,7 @@ __metadata:
     typescript: ^4.5.5
     unplugin-auto-import: ^0.5.11
     unplugin-icons: ^0.13.0
-    unplugin-vue-components: ^0.17.14
+    unplugin-vue-components: 0.17.11
     unplugin-vue2-script-setup: ^0.9.1
     vite: ^2.7.13
     vite-plugin-vue2: ^1.9.3
@@ -4507,20 +4507,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unplugin-vue-components@npm:^0.17.14":
-  version: 0.17.14
-  resolution: "unplugin-vue-components@npm:0.17.14"
+"unplugin-vue-components@npm:0.17.11":
+  version: 0.17.11
+  resolution: "unplugin-vue-components@npm:0.17.11"
   dependencies:
-    "@antfu/utils": ^0.4.0
-    "@rollup/pluginutils": ^4.1.2
+    "@antfu/utils": ^0.3.0
+    "@rollup/pluginutils": ^4.1.1
     chokidar: ^3.5.2
-    debug: ^4.3.3
-    fast-glob: ^3.2.11
-    local-pkg: ^0.4.1
+    debug: ^4.3.2
+    fast-glob: ^3.2.7
+    local-pkg: ^0.4.0
     magic-string: ^0.25.7
     minimatch: ^3.0.4
-    resolve: ^1.21.0
-    unplugin: ^0.3.0
+    resolve: ^1.20.0
+    unplugin: ^0.2.21
   peerDependencies:
     "@babel/parser": ^7.15.8
     "@babel/traverse": ^7.15.4
@@ -4530,7 +4530,7 @@ __metadata:
       optional: true
     "@babel/traverse":
       optional: true
-  checksum: 3683f957bc5752c9f2f9349713d548328d3b86cbf5a07bcca93e040dcc388bbd8c33b07ba260b2e2d1bc60f42cc2c54454e60fb389974be11eef739b133dd6e1
+  checksum: 469ddce824b83be7d0a21e8ed076b18ecf3880cbd397f40ff6d9e4f6bc0cfbc076556b65076a15021d72fbe550fb96c74fcf69e55680a8375d5d6f412650888a
   languageName: node
   linkType: hard
 

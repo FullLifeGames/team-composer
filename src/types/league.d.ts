@@ -1,4 +1,4 @@
-import { GenerationNum } from "@pkmn/dex";
+import type { GenerationNum } from "@pkmn/dex";
 
 export interface League {
   displayName: string;

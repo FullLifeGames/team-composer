@@ -12,6 +12,9 @@
           <router-link to="/" custom v-slot="{ href }">
             <b-nav-item :href="href">Home</b-nav-item>
           </router-link>
+          <router-link to="/mon-filter" custom v-slot="{ href }">
+            <b-nav-item :href="href">Pokémon Filter</b-nav-item>
+          </router-link>
           <router-link to="/team-evaluator" custom v-slot="{ href }">
             <b-nav-item :href="href">Team Evaluator</b-nav-item>
           </router-link>

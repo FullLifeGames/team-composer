@@ -2,6 +2,7 @@ import Vue from "vue";
 import type { RouteConfig } from "vue-router";
 import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
+import MonFilter from "@/views/MonFilter.vue";
 import TeamEvaluator from "@/views/TeamEvaluator.vue";
 import DraftLeagueApplication from "@/views/DraftLeagueApplication.vue";
 
@@ -23,6 +24,24 @@ export const routes: RouteConfig[] = [
     // NOTE: you can also apply meta information
     // meta: {authRequired: false }
     component: Home,
+    // NOTE: you can also lazy-load the component
+    // component: () => import("@/views/About.vue")
+  },
+  {
+    path: "/mon-filter/",
+    name: "MonFilterStart",
+    // NOTE: you can also apply meta information
+    // meta: {authRequired: false }
+    component: MonFilter,
+    // NOTE: you can also lazy-load the component
+    // component: () => import("@/views/About.vue")
+  },
+  {
+    path: "/mon-filter/:league",
+    name: "MonFilter",
+    // NOTE: you can also apply meta information
+    // meta: {authRequired: false }
+    component: MonFilter,
     // NOTE: you can also lazy-load the component
     // component: () => import("@/views/About.vue")
   },

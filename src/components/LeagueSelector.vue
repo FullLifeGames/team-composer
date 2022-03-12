@@ -24,6 +24,13 @@ import rclCSV from "@/assets/leagues/RCL.csv?url";
 import smlCSV from "@/assets/leagues/SML.csv?url";
 import router from "@/router";
 
+const props = defineProps({
+  routeName: {
+    type: String,
+    default: "League",
+  },
+});
+
 let initalLeagueObject: League = {
   displayName: "GPL S8",
   csv: gplS8CSV,
@@ -122,7 +129,7 @@ if (leagueParam) {
   }
 } else {
   router.replace({
-    name: "League",
+    name: props.routeName,
     params: { league: initalLeagueObject.displayName },
   });
 }
@@ -133,7 +140,7 @@ emit("change", initalLeagueObject);
 watch(selectedLeague, () => {
   if (selectedLeague) {
     router.replace({
-      name: "League",
+      name: props.routeName,
       params: { league: selectedLeague.value.displayName },
     });
     emit("change", selectedLeague.value);
