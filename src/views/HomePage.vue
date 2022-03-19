@@ -4,6 +4,10 @@
       header="Team Composer"
       lead="Generate, Manage or Evaluate Draft League Teams"
     >
+      <p>
+        The first page load might take a while, afterwards the Pokémon data
+        should have been cached by your browser!
+      </p>
       <div class="buttonRow">
         <router-link to="/generator" custom v-slot="{ href, isExactActive }">
           <b-button :href="href" :active="isExactActive"

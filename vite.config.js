@@ -22,6 +22,7 @@ const config = defineConfig({
       output: {
         manualChunks: {
           "@pkmn/dex": ["@pkmn/dex"],
+          "bootstrap-vue": ["bootstrap-vue"],
         },
       },
       plugins: [visualizer()],
