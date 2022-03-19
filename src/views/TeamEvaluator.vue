@@ -24,12 +24,14 @@
 </template>
 
 <script setup lang="ts">
-import { Dex, GenerationNum, Species } from "@pkmn/dex";
+import type { GenerationNum, Species } from "@pkmn/dex";
 import { Sets } from "@pkmn/sets";
 import type { Ref } from "@vue/composition-api";
 import type { EvaluationReport } from "@/util/algorithm";
 import { evaluateTeam } from "@/util/algorithm";
-import { League } from "@/types/league";
+import type { League } from "@/types/league";
+
+import { Dex } from "@pkmn/dex";
 
 const currentGen = 8;
 

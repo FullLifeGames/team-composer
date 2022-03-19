@@ -1,6 +1,7 @@
 import type { GenerationNum, Species } from "@pkmn/dex";
-import { Dex } from "@pkmn/dex";
 import translationUrl from "@/assets/pokemonTranslation.json?url";
+
+import { Dex } from "@pkmn/dex";
 
 const responseCollection: { [draftMonsUrl: string]: string } = {};
 

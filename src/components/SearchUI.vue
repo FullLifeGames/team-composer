@@ -22,8 +22,10 @@
 </template>
 
 <script setup lang="ts">
-import { League } from "@/types/league";
-import { Dex, Species } from "@pkmn/dex";
+import type { League } from "@/types/league";
+import type { Species } from "@pkmn/dex";
+
+import { Dex } from "@pkmn/dex";
 
 const props = defineProps<{
   league: League;

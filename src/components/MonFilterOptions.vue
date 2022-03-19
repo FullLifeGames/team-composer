@@ -78,8 +78,10 @@
 <script setup lang="ts">
 import type { League } from "@/types/league";
 import type { MonFilterOption } from "@/types/monFilterOption";
-import { Dex, Type } from "@pkmn/dex";
+import type { Type } from "@pkmn/dex";
 import type { Ability, Move } from "@pkmn/dex-types";
+
+import { Dex } from "@pkmn/dex";
 
 const props = defineProps<{
   league: League;

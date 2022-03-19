@@ -26,7 +26,10 @@
 import type { League } from "@/types/league";
 import type { MonFilterOption } from "@/types/monFilterOption";
 import { Generations } from "@pkmn/data";
-import { Dex, Species } from "@pkmn/dex";
+import type { Species } from "@pkmn/dex";
+
+import { Dex } from "@pkmn/dex";
+import "@pkmn/dex/build/learnsets.min.js";
 
 const props = defineProps<{
   league: League;

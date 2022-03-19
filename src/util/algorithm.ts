@@ -5,9 +5,11 @@ import type {
   Type,
   TypeName,
 } from "@pkmn/dex";
-import { Dex } from "@pkmn/dex";
 import type { Types as DataTypes } from "@pkmn/data";
 import { Generations } from "@pkmn/data";
+
+import { Dex } from "@pkmn/dex";
+import "@pkmn/dex/build/learnsets.min.js";
 
 const gens = new Generations(Dex);
 
