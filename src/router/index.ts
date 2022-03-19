@@ -75,7 +75,7 @@ const router = new VueRouter({
   routes,
 });
 
-import $eventHub from "../components/eventHub";
+import $eventHub from "@/components/eventHub";
 
 router.beforeEach((to, from, next) => {
   if (typeof to.matched[0]?.components.default === "function") {

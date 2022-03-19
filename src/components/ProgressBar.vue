@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import random from "lodash.random";
-import $eventHub from "../components/eventHub";
+import $eventHub from "@/components/eventHub";
 
 // Assume that loading will complete under this amount of time.
 const defaultDuration = 8000;
