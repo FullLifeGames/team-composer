@@ -27,7 +27,7 @@ import { parseFile, stringsToSpecies } from "@/util/parsingLogic";
 import { League } from "@/types/league";
 import { rawCSVFileToMonsList } from "@/util/parsingLogic";
 
-import $eventHub from "../components/eventHub";
+import $eventHub from "@/components/eventHub";
 import router from "@/router";
 
 $eventHub.$emit("asyncComponentLoading", router.currentRoute);
