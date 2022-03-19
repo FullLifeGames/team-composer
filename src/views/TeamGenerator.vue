@@ -27,6 +27,11 @@ import { parseFile, stringsToSpecies } from "@/util/parsingLogic";
 import { League } from "@/types/league";
 import { rawCSVFileToMonsList } from "@/util/parsingLogic";
 
+import $eventHub from "../components/eventHub";
+import router from "@/router";
+
+$eventHub.$emit("asyncComponentLoading", router.currentRoute);
+
 const league = ref({
   csv: "",
   displayName: "",
@@ -59,6 +64,7 @@ async function getData() {
 
 async function generate() {
   loading.value = true;
+  $eventHub.$emit("asyncComponentLoading", router.currentRoute);
 
   const result = await generateTeam(
     league.value.generation,
@@ -71,6 +77,7 @@ async function generate() {
   team.value = result[0];
   evaluationReport.value = result[1];
 
+  $eventHub.$emit("asyncComponentLoaded");
   loading.value = false;
 }
 

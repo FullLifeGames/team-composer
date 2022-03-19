@@ -2,7 +2,6 @@
   <div>
     <p class="h1">Application Notice</p>
     <hr />
-    <br />
     <p>
       If you are running a draft league, you can contact
       <a href="mailto:bene@fulllifegames.com">bene@fulllifegames.com</a> to add

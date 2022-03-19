@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <NavBar />
+    <ProgressBar></ProgressBar>
     <b-container class="text-center team-container">
       <RouterView />
     </b-container>

@@ -2,9 +2,22 @@ import type { GenerationNum, Species } from "@pkmn/dex";
 import { Dex } from "@pkmn/dex";
 import translationUrl from "@/assets/pokemonTranslation.json?url";
 
+const responseCollection: { [draftMonsUrl: string]: string } = {};
+
+export async function retrieveFile(draftMonsUrl: string) {
+  let allText = "";
+  if (responseCollection[draftMonsUrl]) {
+    allText = responseCollection[draftMonsUrl];
+  } else {
+    const response = await fetch(draftMonsUrl);
+    allText = await response.text();
+    responseCollection[draftMonsUrl] = allText;
+  }
+  return allText;
+}
+
 export async function parseFile(draftMonsUrl: string) {
-  const response = await fetch(draftMonsUrl);
-  const allText = await response.text();
+  const allText = await retrieveFile(draftMonsUrl);
   return parseString(allText);
 }
 

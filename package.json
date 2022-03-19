@@ -4,6 +4,7 @@
     "postinstall": "husky install",
     "dev": "vite",
     "build": "vite build",
+    "preview": "vite preview",
     "lint": "eslint \"**/*.{vue,ts,js}\"",
     "lint:fix": "eslint \"**/*.{vue,ts,js}\" --fix"
   },
@@ -17,11 +18,13 @@
     "bootstrap": "~4.6.1",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.20.3",
+    "lodash.random": "^3.2.0",
     "vue": "^2.6.14",
     "vue-router": "^3.5.3"
   },
   "devDependencies": {
     "@iconify/json": "^2.0.29",
+    "@types/lodash.random": "^3.2.6",
     "@typescript-eslint/eslint-plugin": "^5.11.0",
     "@typescript-eslint/parser": "^5.11.0",
     "@vue/eslint-config-prettier": "^6.0.0",
@@ -35,6 +38,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.4.1",
     "husky": "^7.0.4",
+    "rollup-plugin-visualizer": "^5.6.0",
     "typescript": "^4.5.5",
     "unplugin-auto-import": "^0.5.11",
     "unplugin-icons": "^0.13.0",
@@ -42,7 +46,6 @@
     "unplugin-vue2-script-setup": "^0.9.1",
     "vite": "^2.7.13",
     "vite-plugin-vue2": "^1.9.3",
-    "vite-plugin-windicss": "^1.6.3",
     "vue-template-compiler": "^2.6.14"
   },
   "packageManager": "yarn@3.1.1"

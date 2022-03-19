@@ -8,7 +8,6 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 
 import App from "@/App.vue";
 
-import "windi.css";
 import router from "@/router";
 
 Vue.use(VueCompositionApi);

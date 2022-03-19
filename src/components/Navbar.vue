@@ -9,7 +9,7 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <router-link to="/" custom v-slot="{ href, isExactActive }">
+          <router-link to="/generator" custom v-slot="{ href, isExactActive }">
             <b-nav-item :href="href" :active="isExactActive"
               >Team Generator</b-nav-item
             >

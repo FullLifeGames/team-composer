@@ -1,29 +1,35 @@
 import Vue from "vue";
 import type { RouteConfig } from "vue-router";
 import VueRouter from "vue-router";
-import TeamGenerator from "@/views/TeamGenerator.vue";
-import MonFilter from "@/views/MonFilter.vue";
-import TeamEvaluator from "@/views/TeamEvaluator.vue";
-import DraftLeagueApplication from "@/views/DraftLeagueApplication.vue";
+import HomePage from "@/views/HomePage.vue";
 
 Vue.use(VueRouter);
 
 export const routes: RouteConfig[] = [
   {
     path: "/",
-    name: "TeamGenerator",
+    name: "HomePage",
     // NOTE: you can also apply meta information
     // meta: {authRequired: false }
-    component: TeamGenerator,
+    component: HomePage,
+    // NOTE: you can also lazy-load the component
+    // component: () => import("@/views/About.vue")
+  },
+  {
+    path: "/generator/",
+    name: "League",
+    // NOTE: you can also apply meta information
+    // meta: {authRequired: false }
+    component: () => import("@/views/TeamGenerator.vue"),
     // NOTE: you can also lazy-load the component
     // component: () => import("@/views/About.vue")
   },
   {
     path: "/league/:league",
-    name: "League",
+    name: "LeagueSelected",
     // NOTE: you can also apply meta information
     // meta: {authRequired: false }
-    component: TeamGenerator,
+    component: () => import("@/views/TeamGenerator.vue"),
     // NOTE: you can also lazy-load the component
     // component: () => import("@/views/About.vue")
   },
@@ -32,7 +38,7 @@ export const routes: RouteConfig[] = [
     name: "MonFilterStart",
     // NOTE: you can also apply meta information
     // meta: {authRequired: false }
-    component: MonFilter,
+    component: () => import("@/views/MonFilter.vue"),
     // NOTE: you can also lazy-load the component
     // component: () => import("@/views/About.vue")
   },
@@ -41,7 +47,7 @@ export const routes: RouteConfig[] = [
     name: "MonFilter",
     // NOTE: you can also apply meta information
     // meta: {authRequired: false }
-    component: MonFilter,
+    component: () => import("@/views/MonFilter.vue"),
     // NOTE: you can also lazy-load the component
     // component: () => import("@/views/About.vue")
   },
@@ -50,7 +56,7 @@ export const routes: RouteConfig[] = [
     name: "TeamEvaluator",
     // NOTE: you can also apply meta information
     // meta: {authRequired: false }
-    component: TeamEvaluator,
+    component: () => import("@/views/TeamEvaluator.vue"),
     // NOTE: you can also lazy-load the component
     // component: () => import("@/views/About.vue")
   },
@@ -59,7 +65,7 @@ export const routes: RouteConfig[] = [
     name: "DraftLeagueApplication",
     // NOTE: you can also apply meta information
     // meta: {authRequired: false }
-    component: DraftLeagueApplication,
+    component: () => import("@/views/DraftLeagueApplication.vue"),
     // NOTE: you can also lazy-load the component
     // component: () => import("@/views/About.vue")
   },
@@ -67,6 +73,20 @@ export const routes: RouteConfig[] = [
 
 const router = new VueRouter({
   routes,
+});
+
+import $eventHub from "../components/eventHub";
+
+router.beforeEach((to, from, next) => {
+  if (typeof to.matched[0]?.components.default === "function") {
+    $eventHub.$emit("asyncComponentLoading", to); // Start progress bar
+  }
+  next();
+});
+
+router.beforeResolve((to, from, next) => {
+  next();
+  $eventHub.$emit("asyncComponentLoaded"); // Stop progress bar
 });
 
 export default router;

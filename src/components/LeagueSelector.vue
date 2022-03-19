@@ -28,7 +28,7 @@ import router from "@/router";
 const props = defineProps({
   routeName: {
     type: String,
-    default: "League",
+    default: "LeagueSelected",
   },
 });
 
