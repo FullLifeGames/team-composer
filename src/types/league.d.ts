@@ -7,4 +7,5 @@ export interface League {
   requirements: number[];
   language: "en" | "de";
   doubles?: boolean;
+  rawData?: boolean;
 }

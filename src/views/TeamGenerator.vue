@@ -23,7 +23,12 @@ import type { Ref } from "@vue/composition-api";
 import type { EvaluationReport } from "@/util/algorithm";
 import { generateTeam } from "@/util/algorithm";
 
-import { parseFile, stringsToSpecies } from "@/util/parsingLogic";
+import {
+  parseFile,
+  parseString,
+  rawCSVToMonsList,
+  stringsToSpecies,
+} from "@/util/parsingLogic";
 import { League } from "@/types/league";
 import { rawCSVFileToMonsList } from "@/util/parsingLogic";
 
@@ -51,11 +56,20 @@ const species = ref([] as Species[][]);
 async function getData() {
   loading.value = true;
 
-  if (league.value.language === "de") {
-    parsedMons.value = await parseFile(league.value.csv);
+  if (league.value.rawData) {
+    if (league.value.language === "de") {
+      parsedMons.value = await parseString(league.value.csv);
+    } else {
+      parsedMons.value = rawCSVToMonsList(league.value.csv);
+    }
   } else {
-    parsedMons.value = await rawCSVFileToMonsList(league.value.csv);
+    if (league.value.language === "de") {
+      parsedMons.value = await parseFile(league.value.csv);
+    } else {
+      parsedMons.value = await rawCSVFileToMonsList(league.value.csv);
+    }
   }
+
   species.value = stringsToSpecies(league.value.generation, parsedMons.value);
   await generate();
 

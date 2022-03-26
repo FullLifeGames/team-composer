@@ -12,11 +12,14 @@
 <script setup lang="ts">
 import type { League } from "@/types/league";
 
+import { Dex } from "@pkmn/dex";
+
 import brlS2CSV from "@/assets/leagues/BRL_S2.csv?url";
 import gplS5CSV from "@/assets/leagues/GPL_S5.csv?url";
 import gplS6CSV from "@/assets/leagues/GPL_S6.csv?url";
 import gplS7CSV from "@/assets/leagues/GPL_S7.csv?url";
 import gplS8CSV from "@/assets/leagues/GPL_S8.csv?url";
+import gplS9CSV from "@/assets/leagues/GPL_S9.csv?url";
 import miniHKPCSV from "@/assets/leagues/Mini-HKP.csv?url";
 import npblS6CSV from "@/assets/leagues/NPBL_S6.csv?url";
 import pbaS2CSV from "@/assets/leagues/PBA_S2.csv?url";
@@ -24,6 +27,55 @@ import pbaS3CSV from "@/assets/leagues/PBA_S3.csv?url";
 import rclCSV from "@/assets/leagues/RCL.csv?url";
 import smlCSV from "@/assets/leagues/SML.csv?url";
 import router from "@/router";
+import type { GenerationNum } from "@pkmn/img/build/data/interface";
+
+function dexReceiver(generation: GenerationNum): League {
+  const genDex = Dex.forGen(generation);
+  const allSpecies = genDex.species.all();
+  const genOUMons = allSpecies.filter(
+    (species) =>
+      species.tier === "OU" ||
+      species.tier === "(OU)" ||
+      species.tier === "UUBL"
+  );
+  const genUUMons = allSpecies.filter(
+    (species) => species.tier === "UU" || species.tier === "RUBL"
+  );
+  const genRUMons = allSpecies.filter(
+    (species) => species.tier === "RU" || species.tier === "NUBL"
+  );
+  const genNUMons = allSpecies.filter(
+    (species) => species.tier === "NU" || species.tier === "PUBL"
+  );
+
+  let csv = "";
+  if (genRUMons.length > 0) {
+    csv +=
+      genOUMons.join("\t\t") +
+      "\n" +
+      genUUMons.join("\t\t") +
+      "\n" +
+      genRUMons.join("\t\t") +
+      "\n" +
+      genNUMons.join("\t\t");
+  } else {
+    csv +=
+      genOUMons.join("\t\t") +
+      "\n" +
+      genUUMons.join("\t\t") +
+      "\n" +
+      genNUMons.join("\t\t");
+  }
+
+  return {
+    displayName: `Gen ${generation}`,
+    generation: generation,
+    rawData: true,
+    language: "en",
+    requirements: genRUMons.length > 0 ? [3, 3, 3, 3] : [4, 4, 4],
+    csv: csv,
+  };
+}
 
 const props = defineProps({
   routeName: {
@@ -48,6 +100,14 @@ const leagues: League[] = [
     requirements: [3, 4, 4],
     language: "de",
   },
+  dexReceiver(1),
+  dexReceiver(2),
+  dexReceiver(3),
+  dexReceiver(4),
+  dexReceiver(5),
+  dexReceiver(6),
+  dexReceiver(7),
+  dexReceiver(8),
   {
     displayName: "GPL S5",
     csv: gplS5CSV,
@@ -70,6 +130,14 @@ const leagues: League[] = [
     language: "de",
   },
   initalLeagueObject,
+  {
+    displayName: "GPL S9",
+    csv: gplS9CSV,
+    generation: 8,
+    requirements: [2, 2, 3, 2, 2],
+    language: "de",
+    doubles: true,
+  },
   {
     displayName: "Mini-KHP",
     csv: miniHKPCSV,

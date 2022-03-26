@@ -19,7 +19,12 @@ import type { Species } from "@pkmn/dex";
 import type { MonFilterOption } from "@/types/monFilterOption";
 import type { League } from "@/types/league";
 
-import { parseFile, stringsToSpecies } from "@/util/parsingLogic";
+import {
+  parseFile,
+  parseString,
+  rawCSVToMonsList,
+  stringsToSpecies,
+} from "@/util/parsingLogic";
 import { rawCSVFileToMonsList } from "@/util/parsingLogic";
 
 const league = ref({
@@ -38,10 +43,18 @@ async function setSpeciesList() {
   loading.value = true;
 
   let parsedMons = [];
-  if (league.value.language === "de") {
-    parsedMons = await parseFile(league.value.csv);
+  if (league.value.rawData) {
+    if (league.value.language === "de") {
+      parsedMons = await parseString(league.value.csv);
+    } else {
+      parsedMons = rawCSVToMonsList(league.value.csv);
+    }
   } else {
-    parsedMons = await rawCSVFileToMonsList(league.value.csv);
+    if (league.value.language === "de") {
+      parsedMons = await parseFile(league.value.csv);
+    } else {
+      parsedMons = await rawCSVFileToMonsList(league.value.csv);
+    }
   }
   species.value = stringsToSpecies(league.value.generation, parsedMons);
 
