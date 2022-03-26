@@ -30,50 +30,52 @@ import router from "@/router";
 import type { GenerationNum } from "@pkmn/img/build/data/interface";
 
 function dexReceiver(generation: GenerationNum): League {
-  const genDex = Dex.forGen(generation);
-  const allSpecies = genDex.species.all();
-  const genOUMons = allSpecies.filter(
-    (species) =>
-      species.tier === "OU" ||
-      species.tier === "(OU)" ||
-      species.tier === "UUBL"
-  );
-  const genUUMons = allSpecies.filter(
-    (species) => species.tier === "UU" || species.tier === "RUBL"
-  );
-  const genRUMons = allSpecies.filter(
-    (species) => species.tier === "RU" || species.tier === "NUBL"
-  );
-  const genNUMons = allSpecies.filter(
-    (species) => species.tier === "NU" || species.tier === "PUBL"
-  );
+  function createCSV() {
+    const genDex = Dex.forGen(generation);
+    const allSpecies = genDex.species.all();
+    const genOUMons = allSpecies.filter(
+      (species) =>
+        species.tier === "OU" ||
+        species.tier === "(OU)" ||
+        species.tier === "UUBL"
+    );
+    const genUUMons = allSpecies.filter(
+      (species) => species.tier === "UU" || species.tier === "RUBL"
+    );
+    const genRUMons = allSpecies.filter(
+      (species) => species.tier === "RU" || species.tier === "NUBL"
+    );
+    const genNUMons = allSpecies.filter(
+      (species) => species.tier === "NU" || species.tier === "PUBL"
+    );
 
-  let csv = "";
-  if (genRUMons.length > 0) {
-    csv +=
-      genOUMons.join("\t\t") +
-      "\n" +
-      genUUMons.join("\t\t") +
-      "\n" +
-      genRUMons.join("\t\t") +
-      "\n" +
-      genNUMons.join("\t\t");
-  } else {
-    csv +=
-      genOUMons.join("\t\t") +
-      "\n" +
-      genUUMons.join("\t\t") +
-      "\n" +
-      genNUMons.join("\t\t");
+    let csv = "";
+    if (genRUMons.length > 0) {
+      csv +=
+        genOUMons.join("\t\t") +
+        "\n" +
+        genUUMons.join("\t\t") +
+        "\n" +
+        genRUMons.join("\t\t") +
+        "\n" +
+        genNUMons.join("\t\t");
+    } else {
+      csv +=
+        genOUMons.join("\t\t") +
+        "\n" +
+        genUUMons.join("\t\t") +
+        "\n" +
+        genNUMons.join("\t\t");
+    }
+    return csv;
   }
 
   return {
     displayName: `Gen ${generation}`,
     generation: generation,
-    rawData: true,
     language: "en",
-    requirements: genRUMons.length > 0 ? [3, 3, 3, 3] : [4, 4, 4],
-    csv: csv,
+    requirements: generation !== 3 ? [3, 3, 3, 3] : [4, 4, 4],
+    csvFunc: createCSV,
   };
 }
 
@@ -86,7 +88,7 @@ const props = defineProps({
 
 let initalLeagueObject: League = {
   displayName: "GPL S8",
-  csv: gplS8CSV,
+  csvLink: gplS8CSV,
   generation: 8,
   requirements: [2, 2, 3, 2, 2],
   language: "de",
@@ -95,7 +97,7 @@ let initalLeagueObject: League = {
 const leagues: League[] = [
   {
     displayName: "BRL S2",
-    csv: brlS2CSV,
+    csvLink: brlS2CSV,
     generation: 4,
     requirements: [3, 4, 4],
     language: "de",
@@ -110,21 +112,21 @@ const leagues: League[] = [
   dexReceiver(8),
   {
     displayName: "GPL S5",
-    csv: gplS5CSV,
+    csvLink: gplS5CSV,
     generation: 7,
     requirements: [2, 2, 3, 2, 2],
     language: "de",
   },
   {
     displayName: "GPL S6",
-    csv: gplS6CSV,
+    csvLink: gplS6CSV,
     generation: 7,
     requirements: [2, 2, 3, 2, 2],
     language: "de",
   },
   {
     displayName: "GPL S7",
-    csv: gplS7CSV,
+    csvLink: gplS7CSV,
     generation: 8,
     requirements: [2, 3, 3, 3],
     language: "de",
@@ -132,7 +134,7 @@ const leagues: League[] = [
   initalLeagueObject,
   {
     displayName: "GPL S9",
-    csv: gplS9CSV,
+    csvLink: gplS9CSV,
     generation: 8,
     requirements: [2, 2, 3, 2, 2],
     language: "de",
@@ -140,42 +142,42 @@ const leagues: League[] = [
   },
   {
     displayName: "Mini-KHP",
-    csv: miniHKPCSV,
+    csvLink: miniHKPCSV,
     generation: 3,
     requirements: [2, 3, 3, 3],
     language: "de",
   },
   {
     displayName: "NPBL S6",
-    csv: npblS6CSV,
+    csvLink: npblS6CSV,
     generation: 8,
     requirements: [2, 2, 3, 2, 2],
     language: "de",
   },
   {
     displayName: "PBA S2",
-    csv: pbaS2CSV,
+    csvLink: pbaS2CSV,
     generation: 5,
     requirements: [2, 3, 3, 3],
     language: "de",
   },
   {
     displayName: "PBA S3",
-    csv: pbaS3CSV,
+    csvLink: pbaS3CSV,
     generation: 6,
     requirements: [2, 3, 3, 3],
     language: "de",
   },
   {
     displayName: "RCL",
-    csv: rclCSV,
+    csvLink: rclCSV,
     generation: 8,
     requirements: [2, 3, 3, 3],
     language: "de",
   },
   {
     displayName: "SML",
-    csv: smlCSV,
+    csvLink: smlCSV,
     generation: 8,
     requirements: [3, 3, 3, 3],
     language: "de",

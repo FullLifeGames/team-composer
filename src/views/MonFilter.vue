@@ -28,7 +28,7 @@ import {
 import { rawCSVFileToMonsList } from "@/util/parsingLogic";
 
 const league = ref({
-  csv: "",
+  csvLink: "",
   displayName: "",
   requirements: [2, 2, 3, 2, 2],
   generation: 8,
@@ -42,18 +42,18 @@ const monFilterOption = ref({} as MonFilterOption);
 async function setSpeciesList() {
   loading.value = true;
 
-  let parsedMons = [];
-  if (league.value.rawData) {
+  let parsedMons: string[][] = [];
+  if (league.value.csvFunc) {
     if (league.value.language === "de") {
-      parsedMons = await parseString(league.value.csv);
+      parsedMons = await parseString(league.value.csvFunc());
     } else {
-      parsedMons = rawCSVToMonsList(league.value.csv);
+      parsedMons = rawCSVToMonsList(league.value.csvFunc());
     }
-  } else {
+  } else if (league.value.csvLink) {
     if (league.value.language === "de") {
-      parsedMons = await parseFile(league.value.csv);
+      parsedMons = await parseFile(league.value.csvLink);
     } else {
-      parsedMons = await rawCSVFileToMonsList(league.value.csv);
+      parsedMons = await rawCSVFileToMonsList(league.value.csvLink);
     }
   }
   species.value = stringsToSpecies(league.value.generation, parsedMons);

@@ -56,17 +56,17 @@ const species = ref([] as Species[][]);
 async function getData() {
   loading.value = true;
 
-  if (league.value.rawData) {
+  if (league.value.csvFunc) {
     if (league.value.language === "de") {
-      parsedMons.value = await parseString(league.value.csv);
+      parsedMons.value = await parseString(league.value.csvFunc());
     } else {
-      parsedMons.value = rawCSVToMonsList(league.value.csv);
+      parsedMons.value = rawCSVToMonsList(league.value.csvFunc());
     }
-  } else {
+  } else if (league.value.csvLink) {
     if (league.value.language === "de") {
-      parsedMons.value = await parseFile(league.value.csv);
+      parsedMons.value = await parseFile(league.value.csvLink);
     } else {
-      parsedMons.value = await rawCSVFileToMonsList(league.value.csv);
+      parsedMons.value = await rawCSVFileToMonsList(league.value.csvLink);
     }
   }
 
