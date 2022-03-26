@@ -38,7 +38,7 @@ import router from "@/router";
 $eventHub.$emit("asyncComponentLoading", router.currentRoute);
 
 const league = ref({
-  csv: "",
+  csvLink: "",
   displayName: "",
   requirements: [2, 2, 3, 2, 2],
   generation: 8,
