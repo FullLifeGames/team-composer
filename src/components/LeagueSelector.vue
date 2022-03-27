@@ -50,7 +50,7 @@ function dexReceiver(generation: GenerationNum): League {
     );
 
     let csv = "";
-    if (genRUMons.length > 0) {
+    if (generation > 4) {
       csv +=
         genOUMons.join("\t\t") +
         "\n" +
@@ -64,6 +64,8 @@ function dexReceiver(generation: GenerationNum): League {
         genOUMons.join("\t\t") +
         "\n" +
         genUUMons.join("\t\t") +
+        "\t\t" +
+        genRUMons.join("\t\t") +
         "\n" +
         genNUMons.join("\t\t");
     }
@@ -74,7 +76,7 @@ function dexReceiver(generation: GenerationNum): League {
     displayName: `Gen ${generation}`,
     generation: generation,
     language: "en",
-    requirements: generation !== 3 ? [3, 3, 3, 3] : [4, 4, 4],
+    requirements: generation > 4 ? [3, 3, 3, 3] : [4, 4, 4],
     csvFunc: createCSV,
   };
 }
