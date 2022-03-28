@@ -138,7 +138,7 @@ const leagues: League[] = [
     displayName: "GPL S9",
     csvLink: gplS9CSV,
     generation: 8,
-    requirements: [2, 2, 3, 2, 2],
+    requirements: [2, 3, 3, 2, 1],
     language: "de",
     doubles: true,
   },
