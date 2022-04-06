@@ -79,6 +79,10 @@
             {{ props.evaluationReport.tailwindUser }}</b-list-group-item
           >
           <b-list-group-item v-if="props.league.doubles"
+            >Redirect User:
+            {{ props.evaluationReport.redirectUser }}</b-list-group-item
+          >
+          <b-list-group-item v-if="props.league.doubles"
             >Intimidate User:
             {{ props.evaluationReport.intimidateUser }}</b-list-group-item
           >

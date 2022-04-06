@@ -79,6 +79,7 @@ export interface AlgorithmState {
 
   fakeOutUser: Species[];
   tailwindUser: Species[];
+  redirectUser: Species[];
   intimidateUser: Species[];
 }
 
@@ -99,6 +100,7 @@ export interface EvaluationReport {
 
   fakeOutUser?: number;
   tailwindUser?: number;
+  redirectUser?: number;
   intimidateUser?: number;
 }
 
@@ -209,6 +211,12 @@ export async function calculateData(
     allSpecies,
     async (s) => await learnsets.canLearn(s.name, "Tailwind")
   );
+  const redirectUser = await filter(
+    allSpecies,
+    async (s) =>
+      (await learnsets.canLearn(s.name, "Follow Me")) ||
+      (await learnsets.canLearn(s.name, "Rage Powder"))
+  );
   const intimidateUser = getAbilityMons(allSpecies, ["Intimidate"]);
 
   const sunSetter = getAbilityMons(allSpecies, sunAbilities);
@@ -260,6 +268,7 @@ export async function calculateData(
 
     fakeOutUser,
     tailwindUser,
+    redirectUser,
     intimidateUser,
   } as AlgorithmState;
 }
@@ -311,6 +320,9 @@ export async function evaluateTeam(
       mergedTeam.includes(s)
     ).length;
     const tailwindUser = algorithmState.tailwindUser.filter((s) =>
+      mergedTeam.includes(s)
+    ).length;
+    const redirectUser = algorithmState.redirectUser.filter((s) =>
       mergedTeam.includes(s)
     ).length;
     const intimidateUser = algorithmState.intimidateUser.filter((s) =>
@@ -422,38 +434,43 @@ export async function evaluateTeam(
 
     evaluationReport.fakeOutUser = fakeOutUser;
     evaluationReport.tailwindUser = tailwindUser;
+    evaluationReport.redirectUser = redirectUser;
     evaluationReport.intimidateUser = intimidateUser;
 
     evaluationReport.value =
       statValue *
       // If balanced, should be around 1
       typeMatchupValue *
-      // +2 since essential for Gen 4, Rest 1
-      (algorithmState.rocker.length > 0 ? Math.log(rockers + 6) : 1) *
-      // +2 since essential for Gen 6 >=, otherwise +6
+      // +3 since essential for Gen 4, Rest 1
+      (algorithmState.rocker.length > 0 ? Math.log(rockers + 3) : 1) *
+      // +3 since essential for Gen 6 >=, otherwise +6
       (algorithmState.hazardRemover.length > 0
-        ? Math.log(hazardRemovals + (algorithmState.generation >= 6 ? 6 : 6))
+        ? Math.log(hazardRemovals + (algorithmState.generation >= 6 ? 3 : 6))
         : 1) *
-      // +3 since not essential
+      // +6 since not essential
       (algorithmState.otherHazards.length > 0
-        ? Math.log(otherHazards + 10)
+        ? Math.log(otherHazards + 6)
         : 1) *
-      // +3 since not essential
+      // +4 since not essential
       (algorithmState.momentumUser.length > 0
-        ? Math.log(momentumUser + 3)
+        ? Math.log(momentumUser + 4)
         : 1) *
       (doubles
-        ? // +3 since not essential
+        ? // +6 since not essential
           (algorithmState.fakeOutUser.length > 0
-            ? Math.log(fakeOutUser + 3)
+            ? Math.log(fakeOutUser + 6)
             : 1) *
-          // +3 since not essential
+          // +6 since not essential
           (algorithmState.tailwindUser.length > 0
-            ? Math.log(tailwindUser + 3)
+            ? Math.log(tailwindUser + 6)
             : 1) *
-          // +3 since not essential
+          // +6 since not essential
+          (algorithmState.redirectUser.length > 0
+            ? Math.log(redirectUser + 6)
+            : 1) *
+          // +6 since not essential
           (algorithmState.intimidateUser.length > 0
-            ? Math.log(intimidateUser + 3)
+            ? Math.log(intimidateUser + 6)
             : 1)
         : 1) *
       // Can only reduce, since max is 1
