@@ -71,14 +71,6 @@
             {{ props.evaluationReport.momentumUser }}</b-list-group-item
           >
           <b-list-group-item v-if="props.league.doubles"
-            >Quick Guard User:
-            {{ props.evaluationReport.quickGuardUser }}</b-list-group-item
-          >
-          <b-list-group-item v-if="props.league.doubles"
-            >Wide Guard User:
-            {{ props.evaluationReport.wideGuardUser }}</b-list-group-item
-          >
-          <b-list-group-item v-if="props.league.doubles"
             >Fake Out User:
             {{ props.evaluationReport.fakeOutUser }}</b-list-group-item
           >

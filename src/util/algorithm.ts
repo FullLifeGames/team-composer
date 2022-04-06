@@ -77,8 +77,6 @@ export interface AlgorithmState {
 
   momentumUser: Species[];
 
-  quickGuardUser: Species[];
-  wideGuardUser: Species[];
   fakeOutUser: Species[];
   tailwindUser: Species[];
   intimidateUser: Species[];
@@ -99,8 +97,6 @@ export interface EvaluationReport {
   }[];
   momentumUser?: number;
 
-  quickGuardUser?: number;
-  wideGuardUser?: number;
   fakeOutUser?: number;
   tailwindUser?: number;
   intimidateUser?: number;
@@ -204,14 +200,7 @@ export async function calculateData(
       (await learnsets.canLearn(s.name, "Flip Turn")) ||
       (generation >= 8 && (await learnsets.canLearn(s.name, "Teleport")))
   );
-  const quickGuardUser = await filter(
-    allSpecies,
-    async (s) => await learnsets.canLearn(s.name, "Quick Guard")
-  );
-  const wideGuardUser = await filter(
-    allSpecies,
-    async (s) => await learnsets.canLearn(s.name, "Wide Guard")
-  );
+
   const fakeOutUser = await filter(
     allSpecies,
     async (s) => await learnsets.canLearn(s.name, "Fake Out")
@@ -269,8 +258,6 @@ export async function calculateData(
 
     momentumUser,
 
-    quickGuardUser,
-    wideGuardUser,
     fakeOutUser,
     tailwindUser,
     intimidateUser,
@@ -320,12 +307,6 @@ export async function evaluateTeam(
     const typeExists = algorithmState.types.map((type) => {
       return { name: type.name, value: 0 };
     });
-    const quickGuardUser = algorithmState.quickGuardUser.filter((s) =>
-      mergedTeam.includes(s)
-    ).length;
-    const wideGuardUser = algorithmState.wideGuardUser.filter((s) =>
-      mergedTeam.includes(s)
-    ).length;
     const fakeOutUser = algorithmState.fakeOutUser.filter((s) =>
       mergedTeam.includes(s)
     ).length;
@@ -439,8 +420,6 @@ export async function evaluateTeam(
     evaluationReport.typeMatchupValue = typeMatchupValue;
     evaluationReport.momentumUser = momentumUser;
 
-    evaluationReport.quickGuardUser = quickGuardUser;
-    evaluationReport.wideGuardUser = wideGuardUser;
     evaluationReport.fakeOutUser = fakeOutUser;
     evaluationReport.tailwindUser = tailwindUser;
     evaluationReport.intimidateUser = intimidateUser;
@@ -465,14 +444,6 @@ export async function evaluateTeam(
         : 1) *
       (doubles
         ? // +3 since not essential
-          (algorithmState.quickGuardUser.length > 0
-            ? Math.log(quickGuardUser + 3)
-            : 1) *
-          // +3 since not essential
-          (algorithmState.wideGuardUser.length > 0
-            ? Math.log(wideGuardUser + 3)
-            : 1) *
-          // +3 since not essential
           (algorithmState.fakeOutUser.length > 0
             ? Math.log(fakeOutUser + 3)
             : 1) *
