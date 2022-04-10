@@ -123,6 +123,7 @@ const speciesRows = computed(() => {
       const currentObject: { [fieldName: string]: Species | null } = {};
       fields.value.forEach((field, index) => {
         currentObject[field.key] =
+          filteredSpecies.value[index] &&
           filteredSpecies.value[index].length > i
             ? filteredSpecies.value[index][i]
             : null;
