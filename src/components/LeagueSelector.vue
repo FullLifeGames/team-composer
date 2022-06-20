@@ -21,6 +21,7 @@ import gplS7CSV from "@/assets/leagues/GPL_S7.csv?url";
 import gplS8CSV from "@/assets/leagues/GPL_S8.csv?url";
 import gplS9CSV from "@/assets/leagues/GPL_S9.csv?url";
 import miniHKPCSV from "@/assets/leagues/Mini-HKP.csv?url";
+import mplCSV from "@/assets/leagues/MPL.csv?url";
 import npblS6CSV from "@/assets/leagues/NPBL_S6.csv?url";
 import pbaS2CSV from "@/assets/leagues/PBA_S2.csv?url";
 import pbaS3CSV from "@/assets/leagues/PBA_S3.csv?url";
@@ -147,6 +148,13 @@ const leagues: League[] = [
     csvLink: miniHKPCSV,
     generation: 3,
     requirements: [2, 3, 3, 3],
+    language: "de",
+  },
+  {
+    displayName: "MPL (Nat Dex)",
+    csvLink: mplCSV,
+    generation: 8,
+    requirements: [2, 2, 3, 2, 2],
     language: "de",
   },
   {
