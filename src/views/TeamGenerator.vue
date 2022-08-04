@@ -106,7 +106,6 @@ function changeFilter(
 ) {
   filter.value = changedFilter;
   excluded.value = changedExcluded;
-  generate();
 }
 
 function changeDraftMonsUrl(newLeague: League) {
