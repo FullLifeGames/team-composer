@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Species } from "@pkmn/dex";
+import type { Species, SpeciesName } from "@pkmn/dex";
 import type { Ref } from "@vue/composition-api";
 import type { EvaluationReport } from "@/util/algorithm";
 import { generateTeam } from "@/util/algorithm";
@@ -49,6 +49,7 @@ const loading = ref(false);
 const evaluationReport: Ref<EvaluationReport> = ref({ value: 0 });
 
 const filter = ref([] as (Species | null)[][]);
+const excluded = ref([] as SpeciesName[]);
 
 const parsedMons = ref([] as string[][]);
 const species = ref([] as Species[][]);
@@ -82,7 +83,11 @@ async function generate() {
 
   const result = await generateTeam(
     league.value.generation,
-    species.value,
+    species.value.map((speciesList) =>
+      speciesList.filter(
+        (mon) => !excluded.value.some((monName) => monName === mon.name)
+      )
+    ),
     league.value.requirements,
     filter.value,
     undefined,
@@ -95,8 +100,12 @@ async function generate() {
   loading.value = false;
 }
 
-function changeFilter(changedFilter: (Species | null)[][]) {
+function changeFilter(
+  changedFilter: (Species | null)[][],
+  changedExcluded: SpeciesName[]
+) {
   filter.value = changedFilter;
+  excluded.value = changedExcluded;
   generate();
 }
 

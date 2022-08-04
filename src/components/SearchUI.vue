@@ -15,6 +15,62 @@
         </b-form-select>
       </b-col>
     </b-row>
+    <br />
+    <b-row>
+      <b-col>
+        <b-form-group
+          label="Exclude the following:"
+          label-for="tags-component-select"
+        >
+          <!-- Prop `add-on-change` is needed to enable adding tags vie the `change` event -->
+          <b-form-tags
+            id="tags-component-select"
+            v-model="excluded"
+            size="lg"
+            class="mb-2"
+            add-on-change
+            no-outer-focus
+            @input="changeFilter"
+          >
+            <template
+              v-slot="{ tags, inputAttrs, inputHandlers, disabled, removeTag }"
+            >
+              <ul
+                v-if="tags.length > 0"
+                class="list-inline d-inline-block mb-2"
+              >
+                <li v-for="tag in tags" :key="tag" class="list-inline-item">
+                  <b-form-tag
+                    @remove="removeTag(tag)"
+                    :title="tag"
+                    :disabled="disabled"
+                    variant="info"
+                    >{{ tag }}</b-form-tag
+                  >
+                </li>
+              </ul>
+              <b-form-select
+                v-bind="inputAttrs"
+                v-on="inputHandlers"
+                :disabled="
+                  disabled || !excludedOptions || excludedOptions.length === 0
+                "
+                :options="excludedOptions"
+                text-field="name"
+                value-field="species"
+              >
+                <template #first>
+                  <!-- This is required to prevent bugs with Safari -->
+                  <option disabled value="">
+                    Choose a Pokémon to exclude ...
+                  </option>
+                </template>
+              </b-form-select>
+            </template>
+          </b-form-tags>
+        </b-form-group>
+      </b-col>
+    </b-row>
     <b-button class="spacedElement" @click="resetFilter">
       Reset Search
     </b-button>
@@ -23,7 +79,7 @@
 
 <script setup lang="ts">
 import type { League } from "@/types/league";
-import type { Species } from "@pkmn/dex";
+import type { Species, SpeciesName } from "@pkmn/dex";
 
 import { Dex } from "@pkmn/dex";
 
@@ -31,7 +87,11 @@ const props = defineProps<{
   league: League;
 }>();
 const emit = defineEmits<{
-  (e: "changeFilter", filter: (Species | null)[][]): void;
+  (
+    e: "changeFilter",
+    filter: (Species | null)[][],
+    excluded: SpeciesName[]
+  ): void;
 }>();
 const generationDex = computed(() => Dex.forGen(props.league.generation));
 const allSpecies = computed(() =>
@@ -61,12 +121,20 @@ function setFilter() {
 }
 setFilter();
 
+const excluded = ref([] as SpeciesName[]);
+const excludedOptions = computed(() =>
+  allSpeciesOptions.value
+    .map((mon) => mon.name)
+    .filter((opt) => excluded.value.indexOf(opt) === -1)
+);
+
 function changeFilter() {
-  emit("changeFilter", filter.value);
+  emit("changeFilter", filter.value, excluded.value);
 }
 
 function resetFilter() {
   setFilter();
+  excluded.value = [];
   changeFilter();
 }
 </script>
