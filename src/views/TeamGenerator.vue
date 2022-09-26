@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import type { Species, SpeciesName } from "@pkmn/dex";
-import type { Ref } from "@vue/composition-api";
+import type { Ref } from "vue";
 import type { EvaluationReport } from "@/util/algorithm";
 import { generateTeam } from "@/util/algorithm";
 

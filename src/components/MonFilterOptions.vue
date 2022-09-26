@@ -5,9 +5,9 @@
         id="move-input"
         v-model="filterMove"
         :options="moves"
-        @change="changeFilter"
         text-field="name"
         value-field="move"
+        @change="changeFilter"
       >
         <b-form-select-option :value="null"
           >Select a move to filter</b-form-select-option
@@ -19,9 +19,9 @@
         id="type1-input"
         v-model="filterType1"
         :options="types"
-        @change="changeFilter"
         text-field="name"
         value-field="type"
+        @change="changeFilter"
       >
         <b-form-select-option :value="null"
           >Select a type to filter</b-form-select-option
@@ -33,9 +33,9 @@
         id="type2-input"
         v-model="filterType2"
         :options="types"
-        @change="changeFilter"
         text-field="name"
         value-field="type"
+        @change="changeFilter"
       >
         <b-form-select-option :value="null"
           >Select a type to filter</b-form-select-option
@@ -47,9 +47,9 @@
         id="ability-input"
         v-model="filterAbility"
         :options="abilities"
-        @change="changeFilter"
         text-field="name"
         value-field="ability"
+        @change="changeFilter"
       >
         <b-form-select-option :value="null"
           >Select an ability to filter</b-form-select-option
@@ -63,8 +63,8 @@
           v-model="filter"
           type="search"
           placeholder="Type to Search"
-          @change="changeFilter"
           debounce="1000"
+          @change="changeFilter"
         ></b-form-input>
 
         <b-input-group-append>

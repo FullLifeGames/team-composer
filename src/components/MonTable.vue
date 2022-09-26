@@ -5,8 +5,8 @@
       hover
       :items="speciesRows"
       :fields="fields"
-      :isBusy="isBusy"
-      :sortByFormatted="true"
+      :is-busy="isBusy"
+      :sort-by-formatted="true"
       :sort-null-last="true"
     >
       <template #cell()="data">
@@ -30,6 +30,7 @@ import type { Species } from "@pkmn/dex";
 
 import { Dex } from "@pkmn/dex";
 import "@pkmn/dex/build/learnsets.min.js";
+import type { Ref } from "vue";
 
 const props = defineProps<{
   league: League;
@@ -51,7 +52,7 @@ const stringFilter = computed(() => {
 const isBusy = ref(false);
 
 const fields = computed(() => {
-  return props.league.requirements.map((value, index, array) => {
+  return props.league.requirements.map((value, index) => {
     return {
       key: `Tier ${index + 1}`,
       label: `Tier ${index + 1}`,
@@ -105,7 +106,7 @@ async function filterSpeciesArray(speciesList: Species[]) {
   });
 }
 
-const filteredSpecies = asyncComputed(async () => {
+const filteredSpecies: Ref<Species[][]> = asyncComputed(async () => {
   return await Promise.all(
     props.species.map(
       async (speciesList) => await filterSpeciesArray(speciesList)

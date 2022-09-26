@@ -1,12 +1,12 @@
 <template>
   <div>
-    <b-spinner label="Loading..." v-if="loading"></b-spinner>
+    <b-spinner v-if="loading" label="Loading..."></b-spinner>
     <b-row
+      v-else
       align-v="center"
       align-h="center"
       style="width: 100%"
       class="justify-content-md-center"
-      v-else
     >
       <b-col align-self="center" cols="8">
         <div v-for="(line, key) of props.team" :key="key">

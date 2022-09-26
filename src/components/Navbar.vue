@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="dark">
-      <router-link to="/" custom v-slot="{ href }">
+      <router-link v-slot="{ href }" to="/" custom>
         <b-navbar-brand :href="href">Team Composer</b-navbar-brand>
       </router-link>
 
@@ -9,29 +9,29 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <router-link to="/generator" custom v-slot="{ href, isExactActive }">
+          <router-link v-slot="{ href, isExactActive }" to="/generator" custom>
             <b-nav-item :href="href" :active="isExactActive"
               >Team Generator</b-nav-item
             >
           </router-link>
-          <router-link to="/mon-filter" custom v-slot="{ href, isExactActive }">
+          <router-link v-slot="{ href, isExactActive }" to="/mon-filter" custom>
             <b-nav-item :href="href" :active="isExactActive"
               >Pokémon Filter</b-nav-item
             >
           </router-link>
           <router-link
+            v-slot="{ href, isExactActive }"
             to="/team-evaluator"
             custom
-            v-slot="{ href, isExactActive }"
           >
             <b-nav-item :href="href" :active="isExactActive"
               >Team Evaluator</b-nav-item
             >
           </router-link>
           <router-link
+            v-slot="{ href, isExactActive }"
             to="/draft-league-application"
             custom
-            v-slot="{ href, isExactActive }"
           >
             <b-nav-item :href="href" :active="isExactActive"
               >Draft League Application</b-nav-item
@@ -65,7 +65,7 @@
 .navbarImage {
   height: 40px;
 }
-.navbarImage >>> img {
+.navbarImage :deep(img) {
   margin-top: -8px;
 }
 </style>

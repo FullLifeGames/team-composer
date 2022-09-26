@@ -1,6 +1,5 @@
 import Vue from "vue";
 import { createApp, h } from "vue-demi";
-import VueCompositionApi from "@vue/composition-api";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import "bootstrap/dist/css/bootstrap.css";
@@ -10,7 +9,6 @@ import App from "@/App.vue";
 
 import router from "@/router";
 
-Vue.use(VueCompositionApi);
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue);
 // Optionally install the BootstrapVue icon components plugin

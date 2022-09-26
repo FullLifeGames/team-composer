@@ -8,15 +8,15 @@
       :team="team"
     />
     <b-form-textarea
-      class="moreSpace"
       id="textarea"
       v-model="teamDefinition"
+      class="moreSpace"
       placeholder="Input Showdown Importable"
       rows="3"
     ></b-form-textarea>
     <b-form-select
-      class="moreSpace"
       v-model="generation"
+      class="moreSpace"
       :options="options"
     ></b-form-select>
     <b-button class="moreSpace" @click="evaluate"> Evaluate </b-button>
@@ -26,7 +26,7 @@
 <script setup lang="ts">
 import type { GenerationNum, Species } from "@pkmn/dex";
 import { Sets } from "@pkmn/sets";
-import type { Ref } from "@vue/composition-api";
+import type { Ref } from "vue";
 import type { EvaluationReport } from "@/util/algorithm";
 import { evaluateTeam } from "@/util/algorithm";
 import type { League } from "@/types/league";
@@ -51,8 +51,6 @@ const teamDefinition = ref("");
 const league = ref({
   generation: generation.value,
 } as League);
-
-const splitter = 3;
 
 async function evaluate() {
   const sets = teamDefinition.value.split("\n\n");

@@ -8,7 +8,7 @@
     <MonFilterOptions :league="league" @change="changeMonFilterOption" />
     <MonTable
       :league="league"
-      :monFilterOption="monFilterOption"
+      :mon-filter-option="monFilterOption"
       :species="species"
     />
   </div>

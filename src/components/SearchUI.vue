@@ -1,13 +1,13 @@
 <template>
   <div>
     <b-row v-for="(entry, index) in league.requirements" :key="index">
-      <b-col class="spacedElement" v-for="i in entry" :key="i">
+      <b-col v-for="i in entry" :key="i" class="spacedElement">
         <b-form-select
           v-model="filter[index][i - 1]"
           :options="allSpeciesOptions"
-          @change="changeFilter"
           text-field="name"
           value-field="species"
+          @change="changeFilter"
         >
           <b-form-select-option :value="null"
             >Please select an option</b-form-select-option
@@ -33,7 +33,13 @@
             @input="changeFilter"
           >
             <template
-              v-slot="{ tags, inputAttrs, inputHandlers, disabled, removeTag }"
+              #default="{
+                tags,
+                inputAttrs,
+                inputHandlers,
+                disabled,
+                removeTag,
+              }"
             >
               <ul
                 v-if="tags.length > 0"
@@ -41,23 +47,23 @@
               >
                 <li v-for="tag in tags" :key="tag" class="list-inline-item">
                   <b-form-tag
-                    @remove="removeTag(tag)"
                     :title="tag"
                     :disabled="disabled"
                     variant="info"
+                    @remove="removeTag(tag)"
                     >{{ tag }}</b-form-tag
                   >
                 </li>
               </ul>
               <b-form-select
                 v-bind="inputAttrs"
-                v-on="inputHandlers"
                 :disabled="
                   disabled || !excludedOptions || excludedOptions.length === 0
                 "
                 :options="excludedOptions"
                 text-field="name"
                 value-field="species"
+                v-on="inputHandlers"
               >
                 <template #first>
                   <!-- This is required to prevent bugs with Safari -->
