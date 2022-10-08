@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <NavBar />
+    <NavbarHeader />
     <ProgressBar />
     <b-container class="text-center team-container">
       <RouterView />

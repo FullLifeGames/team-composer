@@ -40,11 +40,14 @@ declare module '@vue/runtime-core' {
     MonFilterOptions: typeof import('./components/MonFilterOptions.vue')['default']
     MonRenderer: typeof import('./components/MonRenderer.vue')['default']
     MonTable: typeof import('./components/MonTable.vue')['default']
-    NavBar: typeof import('./components/NavBar.vue')['default']
+    NavbarHeader: typeof import('./components/NavbarHeader.vue')['default']
     ProgressBar: typeof import('./components/ProgressBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SearchUI: typeof import('./components/SearchUI.vue')['default']
     TeamRenderer: typeof import('./components/TeamRenderer.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vBToggle: typeof import('bootstrap-vue')['VBToggle']
   }
 }

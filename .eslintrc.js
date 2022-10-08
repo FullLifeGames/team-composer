@@ -4,7 +4,7 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  ignorePatterns: ["node_modules", "build", "coverage", "auto-import.d.ts", "components.d.ts"],
+  ignorePatterns: ["node_modules", "build", "coverage", "auto-imports.d.ts", "components.d.ts"],
   plugins: ["eslint-comments", "functional"],
   extends: [
     "plugin:vue/recommended",

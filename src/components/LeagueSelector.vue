@@ -27,8 +27,10 @@ import pbaS2CSV from "@/assets/leagues/PBA_S2.csv?url";
 import pbaS3CSV from "@/assets/leagues/PBA_S3.csv?url";
 import rclCSV from "@/assets/leagues/RCL.csv?url";
 import smlCSV from "@/assets/leagues/SML.csv?url";
-import router from "@/router";
+import { useRouter } from "vue-router";
 import type { GenerationNum } from "@pkmn/img/build/data/interface";
+
+const router = useRouter();
 
 function dexReceiver(generation: GenerationNum): League {
   function createCSV() {
@@ -207,7 +209,7 @@ const emit = defineEmits<{
   (e: "change", league: League): void;
 }>();
 
-const leagueParam = router.currentRoute.params.league;
+const leagueParam = router.currentRoute.value.params.league;
 if (leagueParam) {
   const paramLeagueObject = leagues.find(
     (league) => league.displayName === leagueParam
