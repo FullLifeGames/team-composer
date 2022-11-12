@@ -31,11 +31,13 @@ import {
 } from "@/util/parsingLogic";
 import { League } from "@/types/league";
 import { rawCSVFileToMonsList } from "@/util/parsingLogic";
+import { useRouter } from "vue-router";
+import useEmitter from "@/plugins/emitter";
 
-import $eventHub from "@/components/eventHub";
-import router from "@/router";
+const router = useRouter();
+const emitter = useEmitter();
 
-$eventHub.$emit("asyncComponentLoading", router.currentRoute);
+emitter.emit("asyncComponentLoading", router.currentRoute);
 
 const league = ref({
   csvLink: "",
@@ -79,7 +81,7 @@ async function getData() {
 
 async function generate() {
   loading.value = true;
-  $eventHub.$emit("asyncComponentLoading", router.currentRoute);
+  emitter.emit("asyncComponentLoading", router.currentRoute);
 
   const result = await generateTeam(
     league.value.generation,
@@ -96,7 +98,7 @@ async function generate() {
   team.value = result[0];
   evaluationReport.value = result[1];
 
-  $eventHub.$emit("asyncComponentLoaded");
+  emitter.emit("asyncComponentLoaded");
   loading.value = false;
 }
 

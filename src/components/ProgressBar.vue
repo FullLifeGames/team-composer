@@ -14,8 +14,8 @@
 </template>
 
 <script lang="ts">
+import useEmitter from "@/plugins/emitter";
 import random from "lodash.random";
-import $eventHub from "@/components/eventHub";
 
 // Assume that loading will complete under this amount of time.
 const defaultDuration = 8000;
@@ -31,6 +31,12 @@ const endingPoint = 90;
 export default defineComponent({
   name: "ProgressBar",
 
+  setup() {
+    const emitter = useEmitter();
+
+    return { emitter };
+  },
+
   data: () => ({
     isLoading: true, // Once loading is done, start fading away
     isVisible: false, // Once animate finish, set display: none
@@ -39,8 +45,8 @@ export default defineComponent({
   }),
 
   mounted() {
-    $eventHub.$on("asyncComponentLoading", this.start);
-    $eventHub.$on("asyncComponentLoaded", this.stop);
+    this.emitter.on("asyncComponentLoading", this.start);
+    this.emitter.on("asyncComponentLoaded", this.stop);
   },
 
   methods: {
