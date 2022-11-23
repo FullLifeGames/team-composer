@@ -79,7 +79,8 @@ function dexReceiver(generation: GenerationNum): League {
     displayName: `Gen ${generation}`,
     generation: generation,
     language: "en",
-    requirements: generation > 4 ? [3, 3, 3, 3] : [4, 4, 4],
+    requirements:
+      generation === 9 ? [12] : generation > 4 ? [3, 3, 3, 3] : [4, 4, 4],
     csvFunc: createCSV,
   };
 }
@@ -115,6 +116,7 @@ const leagues: League[] = [
   dexReceiver(6),
   dexReceiver(7),
   dexReceiver(8),
+  dexReceiver(9),
   {
     displayName: "GPL S5",
     csvLink: gplS5CSV,

@@ -547,7 +547,7 @@ function filterPokemonList(
   foundMon: number
 ): boolean {
   return (
-    value.num === workingSpecies[foundMon].num ||
+    value.id === workingSpecies[foundMon].id ||
     (value.name.includes("-Mega") &&
       workingSpecies[foundMon].name.includes("-Mega"))
   );
