@@ -299,16 +299,16 @@ export async function evaluateTeam(
   };
   if (numberOfPokemon > 0) {
     const rockers = algorithmState.rocker.filter((s) =>
-      mergedTeam.includes(s)
+      mergedTeam.some((mergedMon) => mergedMon.id === s.id)
     ).length;
     const hazardRemovals = algorithmState.hazardRemover.filter((s) =>
-      mergedTeam.includes(s)
+      mergedTeam.some((mergedMon) => mergedMon.id === s.id)
     ).length;
     const otherHazards = algorithmState.otherHazards.filter((s) =>
-      mergedTeam.includes(s)
+      mergedTeam.some((mergedMon) => mergedMon.id === s.id)
     ).length;
     const momentumUser = algorithmState.momentumUser.filter((s) =>
-      mergedTeam.includes(s)
+      mergedTeam.some((mergedMon) => mergedMon.id === s.id)
     ).length;
     const typeMatchups = algorithmState.types.map((type) => {
       return { name: type.name, value: 1 };
@@ -317,16 +317,16 @@ export async function evaluateTeam(
       return { name: type.name, value: 0 };
     });
     const fakeOutUser = algorithmState.fakeOutUser.filter((s) =>
-      mergedTeam.includes(s)
+      mergedTeam.some((mergedMon) => mergedMon.id === s.id)
     ).length;
     const tailwindUser = algorithmState.tailwindUser.filter((s) =>
-      mergedTeam.includes(s)
+      mergedTeam.some((mergedMon) => mergedMon.id === s.id)
     ).length;
     const redirectUser = algorithmState.redirectUser.filter((s) =>
-      mergedTeam.includes(s)
+      mergedTeam.some((mergedMon) => mergedMon.id === s.id)
     ).length;
     const intimidateUser = algorithmState.intimidateUser.filter((s) =>
-      mergedTeam.includes(s)
+      mergedTeam.some((mergedMon) => mergedMon.id === s.id)
     ).length;
 
     let statValue = 0;
