@@ -5,7 +5,6 @@ import Components from "unplugin-vue-components/vite";
 import Icons from "unplugin-icons/vite";
 import IconsResolver from "unplugin-icons/resolver";
 import AutoImport from "unplugin-auto-import/vite";
-import { visualizer } from "rollup-plugin-visualizer";
 
 import { BootstrapVueResolver } from "unplugin-vue-components/resolvers";
 
@@ -29,7 +28,6 @@ const config = defineConfig({
           "bootstrap-vue": ["bootstrap-vue"],
         },
       },
-      plugins: [visualizer()],
     },
   },
 
