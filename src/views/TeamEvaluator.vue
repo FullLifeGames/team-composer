@@ -62,7 +62,9 @@ async function evaluate() {
     }
     if (sets[i].trim() !== "") {
       const setObj = Sets.importSet(sets[i]);
-      team.value[team.value.length - 1].push(dex.species.get(setObj.species));
+      if (setObj.species) {
+        team.value[team.value.length - 1].push(dex.species.get(setObj.species));
+      }
     }
   }
   evaluationReport.value = await evaluateTeam(team.value, generation.value);

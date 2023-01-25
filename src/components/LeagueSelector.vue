@@ -12,7 +12,7 @@
 <script setup lang="ts">
 import type { League } from "@/types/league";
 
-import { Dex } from "@pkmn/dex";
+import { Dex, type GenerationNum } from "@pkmn/dex";
 
 import brlS2CSV from "@/assets/leagues/BRL_S2.csv?url";
 import gplS5CSV from "@/assets/leagues/GPL_S5.csv?url";
@@ -27,8 +27,8 @@ import pbaS2CSV from "@/assets/leagues/PBA_S2.csv?url";
 import pbaS3CSV from "@/assets/leagues/PBA_S3.csv?url";
 import rclCSV from "@/assets/leagues/RCL.csv?url";
 import smlCSV from "@/assets/leagues/SML.csv?url";
+import mtlCSV from "@/assets/leagues/MTL.csv?url";
 import { useRouter } from "vue-router";
-import type { GenerationNum } from "@pkmn/img/build/data/interface";
 
 const router = useRouter();
 
@@ -194,6 +194,13 @@ const leagues: League[] = [
     csvLink: smlCSV,
     generation: 8,
     requirements: [3, 3, 3, 3],
+    language: "de",
+  },
+  {
+    displayName: "MTL",
+    csvLink: mtlCSV,
+    generation: 9,
+    requirements: [2, 3, 3, 2, 1],
     language: "de",
   },
 ];
