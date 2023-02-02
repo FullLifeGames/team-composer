@@ -47,8 +47,10 @@
             {{ props.evaluationReport.typeMatchupValue }}</b-list-group-item
           >
           <b-list-group-item>
-            <b-button v-b-toggle.collapse-3 class="m-1">Type Matchups</b-button>
-            <b-collapse id="collapse-3">
+            <b-button class="m-1" @click="collapse3Visible = !collapse3Visible"
+              >Type Matchups</b-button
+            >
+            <b-collapse id="collapse-3" v-model="collapse3Visible">
               <b-card>
                 <b-list-group>
                   <b-list-group-item
@@ -102,6 +104,8 @@ const props = defineProps<{
   team: Species[][];
   loading: boolean;
 }>();
+
+const collapse3Visible = ref(false);
 </script>
 
 <style scoped>

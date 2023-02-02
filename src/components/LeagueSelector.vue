@@ -23,6 +23,7 @@ import gplS9CSV from "@/assets/leagues/GPL_S9.csv?url";
 import miniHKPCSV from "@/assets/leagues/Mini-HKP.csv?url";
 import mplCSV from "@/assets/leagues/MPL.csv?url";
 import npblS6CSV from "@/assets/leagues/NPBL_S6.csv?url";
+import npblS7CSV from "@/assets/leagues/NPBL_S7.csv?url";
 import pbaS2CSV from "@/assets/leagues/PBA_S2.csv?url";
 import pbaS3CSV from "@/assets/leagues/PBA_S3.csv?url";
 import rclCSV from "@/assets/leagues/RCL.csv?url";
@@ -93,10 +94,10 @@ const props = defineProps({
 });
 
 let initalLeagueObject: League = {
-  displayName: "GPL S8",
-  csvLink: gplS8CSV,
-  generation: 8,
-  requirements: [2, 2, 3, 2, 2],
+  displayName: "NPBL S7",
+  csvLink: npblS7CSV,
+  generation: 9,
+  requirements: [1, 2, 3, 3, 2],
   language: "de",
 };
 
@@ -138,7 +139,13 @@ const leagues: League[] = [
     requirements: [2, 3, 3, 3],
     language: "de",
   },
-  initalLeagueObject,
+  {
+    displayName: "GPL S8",
+    csvLink: gplS8CSV,
+    generation: 8,
+    requirements: [2, 2, 3, 2, 2],
+    language: "de",
+  },
   {
     displayName: "GPL S9",
     csvLink: gplS9CSV,
@@ -168,6 +175,7 @@ const leagues: League[] = [
     requirements: [2, 2, 3, 2, 2],
     language: "de",
   },
+  initalLeagueObject,
   {
     displayName: "PBA S2",
     csvLink: pbaS2CSV,

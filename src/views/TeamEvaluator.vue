@@ -33,7 +33,7 @@ import type { League } from "@/types/league";
 
 import { Dex } from "@pkmn/dex";
 
-const currentGen = 8;
+const currentGen = 9;
 
 const generation = ref(currentGen as GenerationNum);
 

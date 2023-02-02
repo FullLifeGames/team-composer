@@ -12,6 +12,7 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
+      "unplugin-icons/types/vue",
       "unplugin-vue2-script-setup/types",
       "@vueuse/core"
     ],
@@ -35,8 +36,5 @@
   ],
   "exclude": [
     "node_modules"
-  ],
-  "vueCompilerOptions": {
-    "experimentalCompatMode": 3
-  }
+  ]
 }

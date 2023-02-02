@@ -23,16 +23,20 @@
 
     <br />
 
-    <b-form-file
-      v-model="file1"
-      placeholder="Choose a file or drop it here..."
-      drop-placeholder="Drop file here..."
-      accept=".csv"
-    ></b-form-file>
+    <div class="mb-3">
+      <label for="formFile" class="form-label">Choose a file</label>
+      <input
+        id="formFile"
+        class="form-control"
+        type="file"
+        accept=".csv"
+        @change="validateFile"
+      />
+    </div>
 
     <br />
 
-    <p v-if="file1 !== null">{{ report }}</p>
+    <p v-if="report">{{ report }}</p>
   </div>
 </template>
 
@@ -41,34 +45,32 @@ import { parseString, stringsToSpecies } from "@/util/parsingLogic";
 import { rawCSVToMonsList } from "@/util/parsingLogic";
 import { GenerationNum } from "@pkmn/dex";
 
-const file1 = ref(null as null | Blob);
 const report = ref("");
 
-const currentGeneration = ref(8 as GenerationNum);
+const currentGeneration = ref(9 as GenerationNum);
 
-watch(file1, () => {
-  if (file1.value !== null) {
-    const reader = new FileReader();
-    reader.addEventListener("load", async (event) => {
-      if (event && event.target) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const validateFile = (event: any) => {
+  const reader = new FileReader();
+  reader.addEventListener("load", async (event) => {
+    if (event && event.target) {
+      try {
+        const csvData = event.target.result as string;
         try {
-          const csvData = event.target.result as string;
-          try {
-            const mons = rawCSVToMonsList(csvData);
-            stringsToSpecies(currentGeneration.value, mons);
-          } catch {
-            const result = await parseString(csvData);
-            stringsToSpecies(currentGeneration.value, result);
-          }
-          report.value = "Works!";
-        } catch (e) {
-          report.value = "Broken: " + String(e);
+          const mons = rawCSVToMonsList(csvData);
+          stringsToSpecies(currentGeneration.value, mons);
+        } catch {
+          const result = await parseString(csvData);
+          stringsToSpecies(currentGeneration.value, result);
         }
+        report.value = "Works!";
+      } catch (e) {
+        report.value = "Broken: " + String(e);
       }
-    });
-    reader.readAsText(file1.value);
-  }
-});
+    }
+  });
+  reader.readAsText(event.target.files[0]);
+};
 </script>
 
 <style scoped></style>

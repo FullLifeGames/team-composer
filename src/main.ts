@@ -1,8 +1,8 @@
 import { createApp, h } from "vue";
-import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+import { BootstrapVueNext } from "bootstrap-vue-next";
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap-vue/dist/bootstrap-vue.css";
+import "bootstrap-vue-next/dist/bootstrap-vue-next.css";
 
 import App from "@/App.vue";
 
@@ -16,8 +16,8 @@ const app = createApp({
 });
 
 app.use(createCustomRouter(emitter));
-app.use(BootstrapVue);
-app.use(IconsPlugin);
+app.use(BootstrapVueNext);
+
 app.config.globalProperties.productionTip = false;
 app.config.globalProperties.devtools = true;
 app.config.globalProperties.emitter = emitter;

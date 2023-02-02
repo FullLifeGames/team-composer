@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="dark">
+    <b-navbar toggleable="lg" :dark="true" type="dark" variant="dark">
       <router-link v-slot="{ href }" to="/" custom>
         <b-navbar-brand :href="href">Team Composer</b-navbar-brand>
       </router-link>
@@ -39,15 +39,15 @@
           </router-link>
         </b-navbar-nav>
         <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto navbarImage">
+        <b-navbar-nav class="ms-auto navbarImage">
           <b-nav-item href="https://www.youtube.com/user/FullLifeGames"
-            ><BIconYoutube
+            ><i-bi-youtube
           /></b-nav-item>
           <b-nav-item href="https://twitter.com/fulllifegames"
-            ><BIconTwitter
+            ><i-bi-twitter
           /></b-nav-item>
           <b-nav-item href="https://github.com/FullLifeGames/team-composer"
-            ><BIconGithub
+            ><i-bi-github
           /></b-nav-item>
           <b-nav-item href="https://fulllifegames.com"
             ><img

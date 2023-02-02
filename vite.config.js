@@ -6,13 +6,12 @@ import Icons from "unplugin-icons/vite";
 import IconsResolver from "unplugin-icons/resolver";
 import AutoImport from "unplugin-auto-import/vite";
 
-import { BootstrapVueResolver } from "unplugin-vue-components/resolvers";
+import { BootstrapVueNextResolver } from "./src/util/bootstrapVueResolver";
 
 const config = defineConfig({
   resolve: {
     alias: {
-      "@": `${path.resolve(__dirname, "src")}`,
-      vue: '@vue/compat'
+      "@": `${path.resolve(__dirname, "src")}`
     },
   },
 
@@ -25,32 +24,25 @@ const config = defineConfig({
           "@pkmn/dex/build/learnsets.min.js": [
             "@pkmn/dex/build/learnsets.min.js",
           ],
-          "bootstrap-vue": ["bootstrap-vue"],
+          "bootstrap-vue-next": ["bootstrap-vue-next"],
         },
       },
     },
   },
 
   plugins: [
-    vue({
-      template: {
-        compilerOptions: {
-          compatConfig: {
-            MODE: 3
-          }
-        }
-      }
-    }),
+    vue(),
     Components({
       resolvers: [
-        BootstrapVueResolver(),
-        IconsResolver({
-          prefix: "",
-        }),
+        BootstrapVueNextResolver(),
+        IconsResolver(),
       ],
       dts: "src/components.d.ts",
     }),
-    Icons(),
+    Icons({
+      compiler: 'vue3',
+      autoInstall: true
+    }),
     AutoImport({
       imports: ["vue", "vue-router", "@vueuse/core"],
       dts: "src/auto-imports.d.ts",
