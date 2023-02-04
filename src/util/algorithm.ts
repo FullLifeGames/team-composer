@@ -485,7 +485,7 @@ export async function generateTeam(
   generation: GenerationNum,
   species: Species[][],
   requirements: number[],
-  filterList: (Species | null)[][] = [],
+  filterList: (Species | -1)[][] = [],
   algorithmState?: AlgorithmState,
   doubles?: boolean,
   iterations = 1000
@@ -503,9 +503,9 @@ export async function generateTeam(
       const currentRequirementSpecies: Species[] = [];
       const workingSpecies = species[j];
       for (let k = 0; k < requirements[j]; k++) {
-        if (filterList[j] && filterList[j][k]) {
+        if (filterList[j] && filterList[j][k] && filterList[j][k] !== -1) {
           const fixedSpecies = filterList[j][k];
-          if (fixedSpecies) {
+          if (fixedSpecies && fixedSpecies !== -1) {
             currentRequirementSpecies.push(fixedSpecies);
           }
         } else {

@@ -7,9 +7,9 @@
           :options="allSpeciesOptions"
           text-field="name"
           value-field="species"
-          @change="changeFilter"
+          @update:modelValue="changeFilter"
         >
-          <b-form-select-option :value="null"
+          <b-form-select-option :value="-1"
             >Please select an option</b-form-select-option
           >
         </b-form-select>
@@ -95,7 +95,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   (
     e: "changeFilter",
-    filter: (Species | null)[][],
+    filter: (Species | -1)[][],
     excluded: SpeciesName[]
   ): void;
 }>();
@@ -114,13 +114,13 @@ const allSpeciesOptions = computed(() =>
     };
   })
 );
-const filter = ref([] as (Species | null)[][]);
+const filter = ref([] as (Species | -1)[][]);
 function setFilter() {
   filter.value = [];
   for (let j = 0; j < props.league.requirements.length; j++) {
-    const entryArray = reactive([] as (Species | null)[]);
+    const entryArray = reactive([] as (Species | -1)[]);
     for (let k = 0; k < props.league.requirements[j]; k++) {
-      entryArray.push(null);
+      entryArray.push(-1);
     }
     filter.value.push(entryArray);
   }

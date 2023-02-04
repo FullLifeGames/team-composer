@@ -79,23 +79,39 @@ async function filterSpeciesArray(speciesList: Species[]) {
     if (props.monFilterOption.filter) {
       filterResult = entry.name.toLowerCase().includes(stringFilter.value);
     }
-    if (filterResult && props.monFilterOption.filterMove) {
+    if (
+      filterResult &&
+      props.monFilterOption.filterMove &&
+      props.monFilterOption.filterMove !== -1
+    ) {
       filterResult = await generationData.value.learnsets.canLearn(
         entry.name,
         props.monFilterOption.filterMove
       );
     }
-    if (filterResult && props.monFilterOption.filterType1) {
+    if (
+      filterResult &&
+      props.monFilterOption.filterType1 &&
+      props.monFilterOption.filterType1 !== -1
+    ) {
       filterResult = entry.types.includes(
         props.monFilterOption.filterType1.name
       );
     }
-    if (filterResult && props.monFilterOption.filterType2) {
+    if (
+      filterResult &&
+      props.monFilterOption.filterType2 &&
+      props.monFilterOption.filterType2 !== -1
+    ) {
       filterResult = entry.types.includes(
         props.monFilterOption.filterType2.name
       );
     }
-    if (filterResult && props.monFilterOption.filterAbility) {
+    if (
+      filterResult &&
+      props.monFilterOption.filterAbility &&
+      props.monFilterOption.filterAbility !== -1
+    ) {
       filterResult =
         props.monFilterOption.filterAbility.name === entry.abilities[0] ||
         props.monFilterOption.filterAbility.name === entry.abilities[1] ||

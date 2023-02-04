@@ -3,8 +3,8 @@ import type { Type } from "@pkmn/dex";
 
 export interface MonFilterOption {
   filter: ?string;
-  filterMove: ?Move;
-  filterType1: ?Type;
-  filterType2: ?Type;
-  filterAbility: ?Ability;
+  filterMove: Move | -1;
+  filterType1: Type | -1;
+  filterType2: Type | -1;
+  filterAbility: Ability | -1;
 }

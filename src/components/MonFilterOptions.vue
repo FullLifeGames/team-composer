@@ -7,9 +7,9 @@
         :options="moves"
         text-field="name"
         value-field="move"
-        @change="changeFilter"
+        @update:modelValue="changeFilter"
       >
-        <b-form-select-option :value="null"
+        <b-form-select-option :value="-1"
           >Select a move to filter</b-form-select-option
         >
       </b-form-select>
@@ -21,9 +21,9 @@
         :options="types"
         text-field="name"
         value-field="type"
-        @change="changeFilter"
+        @update:modelValue="changeFilter"
       >
-        <b-form-select-option :value="null"
+        <b-form-select-option :value="-1"
           >Select a type to filter</b-form-select-option
         >
       </b-form-select>
@@ -35,9 +35,9 @@
         :options="types"
         text-field="name"
         value-field="type"
-        @change="changeFilter"
+        @update:modelValue="changeFilter"
       >
-        <b-form-select-option :value="null"
+        <b-form-select-option :value="-1"
           >Select a type to filter</b-form-select-option
         >
       </b-form-select>
@@ -49,9 +49,9 @@
         :options="abilities"
         text-field="name"
         value-field="ability"
-        @change="changeFilter"
+        @update:modelValue="changeFilter"
       >
-        <b-form-select-option :value="null"
+        <b-form-select-option :value="-1"
           >Select an ability to filter</b-form-select-option
         >
       </b-form-select>
@@ -64,7 +64,7 @@
           type="search"
           placeholder="Type to Search"
           debounce="1000"
-          @change="changeFilter"
+          @update:modelValue="changeFilter"
         ></b-form-input>
 
         <b-input-group-append>
@@ -93,12 +93,12 @@ const emit = defineEmits<{
 
 const generationDex = computed(() => Dex.forGen(props.league.generation));
 
-const filterMove = ref(null as Move | null);
+const filterMove = ref(-1 as Move | -1);
 
-const filterType1 = ref(null as Type | null);
-const filterType2 = ref(null as Type | null);
+const filterType1 = ref(-1 as Type | -1);
+const filterType2 = ref(-1 as Type | -1);
 
-const filterAbility = ref(null as Ability | null);
+const filterAbility = ref(-1 as Ability | -1);
 
 const moves = computed(() => {
   return generationDex.value.moves.all().map((move) => {
@@ -141,10 +141,10 @@ function changeFilter() {
 
 function removeFilters() {
   filter.value = "";
-  filterMove.value = null;
-  filterType1.value = null;
-  filterType2.value = null;
-  filterAbility.value = null;
+  filterMove.value = -1;
+  filterType1.value = -1;
+  filterType2.value = -1;
+  filterAbility.value = -1;
   changeFilter();
 }
 </script>

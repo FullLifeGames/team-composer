@@ -50,7 +50,7 @@ const team: Ref<Species[][]> = ref([]);
 const loading = ref(false);
 const evaluationReport: Ref<EvaluationReport> = ref({ value: 0 });
 
-const filter = ref([] as (Species | null)[][]);
+const filter = ref([] as (Species | -1)[][]);
 const excluded = ref([] as SpeciesName[]);
 
 const parsedMons = ref([] as string[][]);
@@ -103,7 +103,7 @@ async function generate() {
 }
 
 function changeFilter(
-  changedFilter: (Species | null)[][],
+  changedFilter: (Species | -1)[][],
   changedExcluded: SpeciesName[]
 ) {
   filter.value = changedFilter;
