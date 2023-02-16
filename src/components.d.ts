@@ -32,6 +32,7 @@ declare module '@vue/runtime-core' {
     BSpinner: typeof import('bootstrap-vue-next')['BSpinner']
     BTable: typeof import('bootstrap-vue-next')['BTable']
     IBiGithub: typeof import('~icons/bi/github')['default']
+    IBiPaypal: typeof import('~icons/bi/paypal')['default']
     IBiTwitter: typeof import('~icons/bi/twitter')['default']
     IBiYoutube: typeof import('~icons/bi/youtube')['default']
     LeagueSelector: typeof import('./components/LeagueSelector.vue')['default']

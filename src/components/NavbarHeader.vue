@@ -49,6 +49,26 @@
           <b-nav-item href="https://github.com/FullLifeGames/team-composer"
             ><i-bi-github
           /></b-nav-item>
+          <li class="nav-item">
+            <form
+              action="https://www.paypal.com/donate"
+              method="post"
+              target="_top"
+            >
+              <input
+                type="hidden"
+                name="hosted_button_id"
+                value="LSAEWSQK7NJBJ"
+              />
+              <a
+                class="nav-link"
+                href="javascript:;"
+                onclick="parentNode.submit();"
+              >
+                <i-bi-paypal />
+              </a>
+            </form>
+          </li>
           <b-nav-item href="https://fulllifegames.com"
             ><img
               class="img-fluid img-profile rounded-circle mx-auto mb-2 navbarImage"
