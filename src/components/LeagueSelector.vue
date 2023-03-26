@@ -29,6 +29,7 @@ import pbaS3CSV from "@/assets/leagues/PBA_S3.csv?url";
 import rclCSV from "@/assets/leagues/RCL.csv?url";
 import smlCSV from "@/assets/leagues/SML.csv?url";
 import mtlCSV from "@/assets/leagues/MTL.csv?url";
+import vblS3CSV from "@/assets/leagues/VBL_S3.csv?url";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -209,6 +210,13 @@ const leagues: League[] = [
     csvLink: mtlCSV,
     generation: 9,
     requirements: [2, 3, 3, 2, 1],
+    language: "de",
+  },
+  {
+    displayName: "VBL S3 (Nat Dex)",
+    csvLink: vblS3CSV,
+    generation: 9,
+    requirements: [2, 2, 3, 3, 1],
     language: "de",
   },
 ];
