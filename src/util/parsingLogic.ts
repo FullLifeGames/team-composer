@@ -68,6 +68,9 @@ export async function parseString(allText: string) {
     } else if (pokemon.includes("Giga-")) {
       const nonGmax = pokemon.replace("Giga-", "");
       translatedPokemon = `${translation[nonGmax]}gmax`;
+    } else if (pokemon.includes("Hisui-")) {
+      const nonGmax = pokemon.replace("Hisui-", "");
+      translatedPokemon = `${translation[nonGmax]}hisui`;
     } else if (pokemon.includes("Galar-")) {
       const nonGalar = pokemon.replace("Galar-", "");
       translatedPokemon = `${translation[nonGalar]}galar`;
