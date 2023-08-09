@@ -7,7 +7,7 @@
           :options="allSpeciesOptions"
           text-field="name"
           value-field="species"
-          @update:modelValue="changeFilter"
+          @update:model-value="changeFilter"
         >
           <b-form-select-option :value="-1"
             >Please select an option</b-form-select-option
@@ -96,7 +96,7 @@ const emit = defineEmits<{
   (
     e: "changeFilter",
     filter: (Species | -1)[][],
-    excluded: SpeciesName[]
+    excluded: SpeciesName[],
   ): void;
 }>();
 const generationDex = computed(() => Dex.forGen(props.league.generation));
@@ -104,7 +104,7 @@ const allSpecies = computed(() =>
   generationDex.value.species
     .all()
     .filter((species) => species.exists)
-    .sort()
+    .sort(),
 );
 const allSpeciesOptions = computed(() =>
   allSpecies.value.map((species) => {
@@ -112,7 +112,7 @@ const allSpeciesOptions = computed(() =>
       name: species.name,
       species: species,
     };
-  })
+  }),
 );
 const filter = ref([] as (Species | -1)[][]);
 function setFilter() {
@@ -131,7 +131,7 @@ const excluded = ref([] as SpeciesName[]);
 const excludedOptions = computed(() =>
   allSpeciesOptions.value
     .map((mon) => mon.name)
-    .filter((opt) => excluded.value.indexOf(opt) === -1)
+    .filter((opt) => excluded.value.indexOf(opt) === -1),
 );
 
 function changeFilter() {

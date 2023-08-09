@@ -15,12 +15,12 @@ const gens = new Generations(Dex);
 
 async function filter<T>(
   arr: readonly T[] | T[],
-  callback: (item: T) => Promise<boolean>
+  callback: (item: T) => Promise<boolean>,
 ) {
   const fail = Symbol("test");
   return (
     await Promise.all(
-      arr.map(async (item) => ((await callback(item)) ? item : fail))
+      arr.map(async (item) => ((await callback(item)) ? item : fail)),
     )
   ).filter((i) => i !== fail);
 }
@@ -31,14 +31,14 @@ function getRandomInt(max: number) {
 
 function getAbilityMons(
   list: readonly Species[] | Species[],
-  abilities: string[]
+  abilities: string[],
 ) {
   return list.filter(
     (s) =>
       abilities.includes(s.abilities[0]) ||
       abilities.includes(s.abilities[1] as string) ||
       abilities.includes(s.abilities.H as string) ||
-      abilities.includes(s.abilities.S as string)
+      abilities.includes(s.abilities.S as string),
   );
 }
 
@@ -105,7 +105,7 @@ export interface EvaluationReport {
 }
 
 export async function calculateData(
-  generation: GenerationNum
+  generation: GenerationNum,
 ): Promise<AlgorithmState> {
   const generationDex = Dex.forGen(generation);
   const allSpecies = generationDex.species.all();
@@ -177,21 +177,21 @@ export async function calculateData(
   const learnsets = generationData.learnsets;
   const rocker = await filter(
     allSpecies,
-    async (s) => await learnsets.canLearn(s.name, "Stealth Rock")
+    async (s) => await learnsets.canLearn(s.name, "Stealth Rock"),
   );
   const hazardRemover = await filter(
     allSpecies,
     async (s) =>
       (await learnsets.canLearn(s.name, "Rapid Spin")) ||
       (generation >= 6 && (await learnsets.canLearn(s.name, "Defog"))) ||
-      (await learnsets.canLearn(s.name, "Court Change"))
+      (await learnsets.canLearn(s.name, "Court Change")),
   );
   const otherHazards = await filter(
     allSpecies,
     async (s) =>
       (await learnsets.canLearn(s.name, "Spikes")) ||
       (await learnsets.canLearn(s.name, "Sticky Web")) ||
-      (await learnsets.canLearn(s.name, "Toxic Spikes"))
+      (await learnsets.canLearn(s.name, "Toxic Spikes")),
   );
   const momentumUser = await filter(
     allSpecies,
@@ -200,22 +200,22 @@ export async function calculateData(
       (await learnsets.canLearn(s.name, "Volt Switch")) ||
       (await learnsets.canLearn(s.name, "Baton Pass")) ||
       (await learnsets.canLearn(s.name, "Flip Turn")) ||
-      (generation >= 8 && (await learnsets.canLearn(s.name, "Teleport")))
+      (generation >= 8 && (await learnsets.canLearn(s.name, "Teleport"))),
   );
 
   const fakeOutUser = await filter(
     allSpecies,
-    async (s) => await learnsets.canLearn(s.name, "Fake Out")
+    async (s) => await learnsets.canLearn(s.name, "Fake Out"),
   );
   const tailwindUser = await filter(
     allSpecies,
-    async (s) => await learnsets.canLearn(s.name, "Tailwind")
+    async (s) => await learnsets.canLearn(s.name, "Tailwind"),
   );
   const redirectUser = await filter(
     allSpecies,
     async (s) =>
       (await learnsets.canLearn(s.name, "Follow Me")) ||
-      (await learnsets.canLearn(s.name, "Rage Powder"))
+      (await learnsets.canLearn(s.name, "Rage Powder")),
   );
   const intimidateUser = getAbilityMons(allSpecies, ["Intimidate"]);
 
@@ -276,7 +276,7 @@ export async function calculateData(
 export async function evaluateTeam(
   teamPokemon: Species[] | Species[][],
   algorithmState: AlgorithmState | GenerationNum,
-  doubles?: boolean
+  doubles?: boolean,
 ): Promise<EvaluationReport> {
   if (typeof algorithmState === "number")
     algorithmState = await calculateData(algorithmState);
@@ -299,16 +299,16 @@ export async function evaluateTeam(
   };
   if (numberOfPokemon > 0) {
     const rockers = algorithmState.rocker.filter((s) =>
-      mergedTeam.some((mergedMon) => mergedMon.id === s.id)
+      mergedTeam.some((mergedMon) => mergedMon.id === s.id),
     ).length;
     const hazardRemovals = algorithmState.hazardRemover.filter((s) =>
-      mergedTeam.some((mergedMon) => mergedMon.id === s.id)
+      mergedTeam.some((mergedMon) => mergedMon.id === s.id),
     ).length;
     const otherHazards = algorithmState.otherHazards.filter((s) =>
-      mergedTeam.some((mergedMon) => mergedMon.id === s.id)
+      mergedTeam.some((mergedMon) => mergedMon.id === s.id),
     ).length;
     const momentumUser = algorithmState.momentumUser.filter((s) =>
-      mergedTeam.some((mergedMon) => mergedMon.id === s.id)
+      mergedTeam.some((mergedMon) => mergedMon.id === s.id),
     ).length;
     const typeMatchups = algorithmState.types.map((type) => {
       return { name: type.name, value: 1 };
@@ -317,16 +317,16 @@ export async function evaluateTeam(
       return { name: type.name, value: 0 };
     });
     const fakeOutUser = algorithmState.fakeOutUser.filter((s) =>
-      mergedTeam.some((mergedMon) => mergedMon.id === s.id)
+      mergedTeam.some((mergedMon) => mergedMon.id === s.id),
     ).length;
     const tailwindUser = algorithmState.tailwindUser.filter((s) =>
-      mergedTeam.some((mergedMon) => mergedMon.id === s.id)
+      mergedTeam.some((mergedMon) => mergedMon.id === s.id),
     ).length;
     const redirectUser = algorithmState.redirectUser.filter((s) =>
-      mergedTeam.some((mergedMon) => mergedMon.id === s.id)
+      mergedTeam.some((mergedMon) => mergedMon.id === s.id),
     ).length;
     const intimidateUser = algorithmState.intimidateUser.filter((s) =>
-      mergedTeam.some((mergedMon) => mergedMon.id === s.id)
+      mergedTeam.some((mergedMon) => mergedMon.id === s.id),
     ).length;
 
     let statValue = 0;
@@ -393,7 +393,7 @@ export async function evaluateTeam(
             2 -
             algorithmState.dataTypes.totalEffectiveness(
               typeMatchup.name,
-              mon.types
+              mon.types,
             ) /
               2;
       }
@@ -411,13 +411,13 @@ export async function evaluateTeam(
       typeMatchups.reduce(
         (previousValue: number, currentValue) =>
           previousValue + currentValue.value,
-        0
+        0,
       ) / algorithmState.types.length;
     const ownTypesCovered =
       typeExists.reduce(
         (previousValue: number, currentValue) =>
           previousValue + currentValue.value,
-        0
+        0,
       ) / algorithmState.types.length;
 
     // Using 600 as a basemark of good stats
@@ -488,7 +488,7 @@ export async function generateTeam(
   filterList: (Species | -1)[][] = [],
   algorithmState?: AlgorithmState,
   doubles?: boolean,
-  iterations = 1000
+  iterations = 1000,
 ): Promise<[Species[][], EvaluationReport]> {
   if (!algorithmState) algorithmState = await calculateData(generation);
 
@@ -517,11 +517,11 @@ export async function generateTeam(
             if (
               !newTeam.some((entryList) =>
                 entryList.some((s) =>
-                  filterPokemonList(s, workingSpecies, foundMon)
-                )
+                  filterPokemonList(s, workingSpecies, foundMon),
+                ),
               ) &&
               !currentRequirementSpecies.some((s) =>
-                filterPokemonList(s, workingSpecies, foundMon)
+                filterPokemonList(s, workingSpecies, foundMon),
               )
             )
               break;
@@ -544,7 +544,7 @@ export async function generateTeam(
 function filterPokemonList(
   value: Species,
   workingSpecies: Species[],
-  foundMon: number
+  foundMon: number,
 ): boolean {
   return (
     value.id === workingSpecies[foundMon].id ||

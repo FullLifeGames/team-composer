@@ -55,7 +55,7 @@ const COMPONENT_ALIASES: Record<string, string> = {
  * @link https://github.com/bootstrap-vue/bootstrap-vue
  */
 export const BootstrapVueResolver = (
-  _options: BootstrapVueResolverOptions = {}
+  _options: BootstrapVueResolverOptions = {},
 ): ComponentResolver[] => {
   const options = { directives: true, ..._options };
   const resolvers: ComponentResolver[] = [
@@ -95,7 +95,7 @@ export const BootstrapVueResolver = (
  * @link https://github.com/bootstrap-vue/bootstrap-vue-next
  */
 export const BootstrapVueNextResolver = (
-  _options: BootstrapVueResolverOptions = {}
+  _options: BootstrapVueResolverOptions = {},
 ): Array<ComponentResolver> => {
   const options = { directives: true, ..._options };
   const resolvers: Array<ComponentResolver> = [
@@ -127,7 +127,7 @@ export const BootstrapVueNextResolver = (
  * @link https://www.npmjs.com/package/bootstrap-vue-3
  */
 export const BootstrapVue3Resolver = (
-  _options: BootstrapVueResolverOptions = {}
+  _options: BootstrapVueResolverOptions = {},
 ): Array<ComponentResolver> => {
   const options = { directives: true, ..._options };
   const resolvers: Array<ComponentResolver> = [

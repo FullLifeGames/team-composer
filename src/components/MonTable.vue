@@ -66,7 +66,7 @@ const fields = computed(() => {
 });
 async function asyncFilter<T>(
   arr: T[],
-  predicate: (entry: T) => Promise<boolean>
+  predicate: (entry: T) => Promise<boolean>,
 ) {
   const results = await Promise.all(arr.map(predicate));
 
@@ -86,7 +86,7 @@ async function filterSpeciesArray(speciesList: Species[]) {
     ) {
       filterResult = await generationData.value.learnsets.canLearn(
         entry.name,
-        props.monFilterOption.filterMove
+        props.monFilterOption.filterMove,
       );
     }
     if (
@@ -95,7 +95,7 @@ async function filterSpeciesArray(speciesList: Species[]) {
       props.monFilterOption.filterType1 !== -1
     ) {
       filterResult = entry.types.includes(
-        props.monFilterOption.filterType1.name
+        props.monFilterOption.filterType1.name,
       );
     }
     if (
@@ -104,7 +104,7 @@ async function filterSpeciesArray(speciesList: Species[]) {
       props.monFilterOption.filterType2 !== -1
     ) {
       filterResult = entry.types.includes(
-        props.monFilterOption.filterType2.name
+        props.monFilterOption.filterType2.name,
       );
     }
     if (
@@ -125,15 +125,15 @@ async function filterSpeciesArray(speciesList: Species[]) {
 const filteredSpecies: Ref<Species[][]> = asyncComputed(async () => {
   return await Promise.all(
     props.species.map(
-      async (speciesList) => await filterSpeciesArray(speciesList)
-    )
+      async (speciesList) => await filterSpeciesArray(speciesList),
+    ),
   );
 });
 
 const speciesRows = computed(() => {
   if (filteredSpecies.value) {
     const maxLength = Math.max(
-      ...filteredSpecies.value.map((entry) => entry.length)
+      ...filteredSpecies.value.map((entry) => entry.length),
     );
     const returnList: { [fieldName: string]: Species | null }[] = [];
     for (let i = 0; i < maxLength; i++) {

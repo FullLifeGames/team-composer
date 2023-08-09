@@ -67,15 +67,15 @@ export default defineComponent({
       const size =
         (endingPoint - startingPoint) / (defaultDuration / defaultInterval);
       const p = Math.round(
-        this.progress + random(size * (1 - variation), size * (1 + variation))
+        this.progress + random(size * (1 - variation), size * (1 + variation)),
       );
       this.progress = Math.min(p, endingPoint);
       this.timeoutId = setTimeout(
         this.loop,
         random(
           defaultInterval * (1 - variation),
-          defaultInterval * (1 + variation)
-        )
+          defaultInterval * (1 + variation),
+        ),
       );
     },
 

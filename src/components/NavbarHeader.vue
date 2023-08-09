@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" :dark="true" type="dark" variant="dark">
+    <b-navbar toggleable="lg" class="bg-primary" data-bs-theme="dark">
       <router-link v-slot="{ href }" to="/" custom>
         <b-navbar-brand :href="href">Team Composer</b-navbar-brand>
       </router-link>
@@ -82,6 +82,19 @@
 </template>
 
 <style scoped>
+.bg-primary {
+  --bvn-primary: rgb(24, 25, 79);
+  --bvn-bg-primary: linear-gradient(
+    45deg,
+    var(--bvn-primary) 0%,
+    hsla(230, 25%, 18%, 1) 72%,
+    rgb(10, 17, 30) 100%
+  );
+  background: var(--bvn-bg-primary) !important;
+}
+.bg-primary :deep(.navbar-toggler-icon) {
+  mix-blend-mode: color-dodge !important;
+}
 .navbarImage {
   height: 40px;
 }

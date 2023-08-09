@@ -8,11 +8,11 @@
       :loading="loading"
       :team="team"
     />
-    <b-button @click="generate"> Generate </b-button>
+    <b-button :disabled="loading" @click="generate"> Generate </b-button>
     <SearchUI
       class="spacedElement"
       :league="league"
-      @changeFilter="changeFilter"
+      @change-filter="changeFilter"
     />
   </div>
 </template>
@@ -87,13 +87,13 @@ async function generate() {
     league.value.generation,
     species.value.map((speciesList) =>
       speciesList.filter(
-        (mon) => !excluded.value.some((monName) => monName === mon.name)
-      )
+        (mon) => !excluded.value.some((monName) => monName === mon.name),
+      ),
     ),
     league.value.requirements,
     filter.value,
     undefined,
-    league.value.doubles
+    league.value.doubles,
   );
   team.value = result[0];
   evaluationReport.value = result[1];
@@ -104,7 +104,7 @@ async function generate() {
 
 function changeFilter(
   changedFilter: (Species | -1)[][],
-  changedExcluded: SpeciesName[]
+  changedExcluded: SpeciesName[],
 ) {
   filter.value = changedFilter;
   excluded.value = changedExcluded;

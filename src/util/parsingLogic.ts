@@ -139,7 +139,7 @@ export function rawCSVToMonsList(csv: string): string[][] {
 
 export function stringsToSpecies(
   generation: GenerationNum,
-  monsList: string[][]
+  monsList: string[][],
 ): Species[][] {
   const generationDex = Dex.forGen(generation);
   const speciesList: Species[][] = [];

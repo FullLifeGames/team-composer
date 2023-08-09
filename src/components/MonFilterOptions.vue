@@ -1,62 +1,62 @@
 <template>
   <div>
-    <b-form-group label="Move" label-for="move-input">
+    <b-form-group class="mb-3" label="Move" label-for="move-input">
       <b-form-select
         id="move-input"
         v-model="filterMove"
         :options="moves"
         text-field="name"
         value-field="move"
-        @update:modelValue="changeFilter"
+        @update:model-value="changeFilter"
       >
         <b-form-select-option :value="-1"
           >Select a move to filter</b-form-select-option
         >
       </b-form-select>
     </b-form-group>
-    <b-form-group label="Type 1" label-for="type1-input">
+    <b-form-group class="mb-3" label="Type 1" label-for="type1-input">
       <b-form-select
         id="type1-input"
         v-model="filterType1"
         :options="types"
         text-field="name"
         value-field="type"
-        @update:modelValue="changeFilter"
+        @update:model-value="changeFilter"
       >
         <b-form-select-option :value="-1"
           >Select a type to filter</b-form-select-option
         >
       </b-form-select>
     </b-form-group>
-    <b-form-group label="Type 2" label-for="type2-input">
+    <b-form-group class="mb-3" label="Type 2" label-for="type2-input">
       <b-form-select
         id="type2-input"
         v-model="filterType2"
         :options="types"
         text-field="name"
         value-field="type"
-        @update:modelValue="changeFilter"
+        @update:model-value="changeFilter"
       >
         <b-form-select-option :value="-1"
           >Select a type to filter</b-form-select-option
         >
       </b-form-select>
     </b-form-group>
-    <b-form-group label="Ability" label-for="ability-input">
+    <b-form-group class="mb-3" label="Ability" label-for="ability-input">
       <b-form-select
         id="ability-input"
         v-model="filterAbility"
         :options="abilities"
         text-field="name"
         value-field="ability"
-        @update:modelValue="changeFilter"
+        @update:model-value="changeFilter"
       >
         <b-form-select-option :value="-1"
           >Select an ability to filter</b-form-select-option
         >
       </b-form-select>
     </b-form-group>
-    <b-form-group label="Name Filter" label-for="filter-input">
+    <b-form-group class="mb-3" label="Name Filter" label-for="filter-input">
       <b-input-group size="sm">
         <b-form-input
           id="filter-input"
@@ -64,7 +64,7 @@
           type="search"
           placeholder="Type to Search"
           debounce="1000"
-          @update:modelValue="changeFilter"
+          @update:model-value="changeFilter"
         ></b-form-input>
 
         <b-input-group-append>

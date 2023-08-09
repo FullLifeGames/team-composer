@@ -42,16 +42,16 @@ function dexReceiver(generation: GenerationNum): League {
       (species) =>
         species.tier === "OU" ||
         species.tier === "(OU)" ||
-        species.tier === "UUBL"
+        species.tier === "UUBL",
     );
     const genUUMons = allSpecies.filter(
-      (species) => species.tier === "UU" || species.tier === "RUBL"
+      (species) => species.tier === "UU" || species.tier === "RUBL",
     );
     const genRUMons = allSpecies.filter(
-      (species) => species.tier === "RU" || species.tier === "NUBL"
+      (species) => species.tier === "RU" || species.tier === "NUBL",
     );
     const genNUMons = allSpecies.filter(
-      (species) => species.tier === "NU" || species.tier === "PUBL"
+      (species) => species.tier === "NU" || species.tier === "PUBL",
     );
 
     let csv = "";
@@ -81,8 +81,7 @@ function dexReceiver(generation: GenerationNum): League {
     displayName: `Gen ${generation}`,
     generation: generation,
     language: "en",
-    requirements:
-      generation === 9 ? [12] : generation > 4 ? [3, 3, 3, 3] : [4, 4, 4],
+    requirements: generation > 4 ? [3, 3, 3, 3] : [4, 4, 4],
     csvFunc: createCSV,
   };
 }
@@ -227,7 +226,7 @@ const leaguesOptions = computed(() =>
       name: `${league.displayName} (Gen ${league.generation})`,
       league: league,
     };
-  })
+  }),
 );
 
 const emit = defineEmits<{
@@ -237,7 +236,7 @@ const emit = defineEmits<{
 const leagueParam = router.currentRoute.value.params.league;
 if (leagueParam) {
   const paramLeagueObject = leagues.find(
-    (league) => league.displayName === leagueParam
+    (league) => league.displayName === leagueParam,
   );
   if (paramLeagueObject) {
     initalLeagueObject = paramLeagueObject;
