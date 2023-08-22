@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!loading">
     <b-row v-for="(entry, index) in league.requirements" :key="index">
       <b-col v-for="i in entry" :key="i" class="spacedElement">
         <b-form-select
@@ -91,6 +91,7 @@ import { Dex } from "@pkmn/dex";
 
 const props = defineProps<{
   league: League;
+  loading: boolean;
 }>();
 const emit = defineEmits<{
   (

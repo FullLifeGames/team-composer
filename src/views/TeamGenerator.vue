@@ -8,12 +8,24 @@
       :loading="loading"
       :team="team"
     />
-    <b-button :disabled="loading" @click="generate"> Generate </b-button>
-    <SearchUI
-      class="spacedElement"
-      :league="league"
-      @change-filter="changeFilter"
-    />
+    <div class="ml-2 mb-3">
+      <b-button :disabled="loading" @click="generate"> Generate </b-button>
+      <b-button
+        :disabled="loading"
+        style="margin-left: 0.5rem"
+        @click="toggleSearch"
+      >
+        Toggle Search
+      </b-button>
+    </div>
+    <div v-if="searchEnabled">
+      <SearchUI
+        class="spacedElement"
+        :league="league"
+        :loading="loading"
+        @change-filter="changeFilter"
+      />
+    </div>
   </div>
 </template>
 
@@ -21,7 +33,7 @@
 import type { Species, SpeciesName } from "@pkmn/dex";
 import type { Ref } from "vue";
 import type { EvaluationReport } from "@/util/algorithm";
-import { generateTeam } from "@/util/algorithm";
+import { getGenerateTeam } from "@/util/algorithmImport";
 
 import {
   parseFile,
@@ -83,6 +95,7 @@ async function generate() {
   loading.value = true;
   emitter.emit("asyncComponentLoading", router.currentRoute);
 
+  const generateTeam = await getGenerateTeam();
   const result = await generateTeam(
     league.value.generation,
     species.value.map((speciesList) =>
@@ -110,10 +123,26 @@ function changeFilter(
   excluded.value = changedExcluded;
 }
 
+const searchEnabled = ref(false);
+function toggleSearch() {
+  searchEnabled.value = !searchEnabled.value;
+}
+
+const mounted = ref(false);
+
 function changeDraftMonsUrl(newLeague: League) {
   league.value = newLeague;
-  getData();
+  if (mounted.value) {
+    getData();
+  }
 }
+
+onMounted(() => {
+  mounted.value = true;
+  if (league.value.csvLink) {
+    getData();
+  }
+});
 </script>
 
 <style scoped>
