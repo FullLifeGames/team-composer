@@ -27,7 +27,8 @@ import npblS7CSV from "@/assets/leagues/NPBL_S7.csv?url";
 import pbaS2CSV from "@/assets/leagues/PBA_S2.csv?url";
 import pbaS3CSV from "@/assets/leagues/PBA_S3.csv?url";
 import rclCSV from "@/assets/leagues/RCL.csv?url";
-import smlCSV from "@/assets/leagues/SML.csv?url";
+import smlS8CSV from "@/assets/leagues/SML_S8.csv?url";
+import smlS9CSV from "@/assets/leagues/SML_S9.csv?url";
 import mtlCSV from "@/assets/leagues/MTL.csv?url";
 import vblS3CSV from "@/assets/leagues/VBL_S3.csv?url";
 import { useRouter } from "vue-router";
@@ -198,9 +199,16 @@ const leagues: League[] = [
     language: "de",
   },
   {
-    displayName: "SML",
-    csvLink: smlCSV,
+    displayName: "SML S8",
+    csvLink: smlS8CSV,
     generation: 8,
+    requirements: [3, 3, 3, 3],
+    language: "de",
+  },
+  {
+    displayName: "SML S9",
+    csvLink: smlS9CSV,
+    generation: 9,
     requirements: [3, 3, 3, 3],
     language: "de",
   },
