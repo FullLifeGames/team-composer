@@ -30,6 +30,7 @@ import rclCSV from "@/assets/leagues/RCL.csv?url";
 import smlS8CSV from "@/assets/leagues/SML_S8.csv?url";
 import smlS9CSV from "@/assets/leagues/SML_S9.csv?url";
 import mtlCSV from "@/assets/leagues/MTL.csv?url";
+import ubrlCSV from "@/assets/leagues/UBRL.csv?url";
 import vblS3CSV from "@/assets/leagues/VBL_S3.csv?url";
 import { useRouter } from "vue-router";
 
@@ -217,6 +218,13 @@ const leagues: League[] = [
     csvLink: mtlCSV,
     generation: 9,
     requirements: [2, 3, 3, 2, 1],
+    language: "de",
+  },
+  {
+    displayName: "UBRL",
+    csvLink: ubrlCSV,
+    generation: 4,
+    requirements: [3, 8],
     language: "de",
   },
   {
