@@ -281,6 +281,8 @@
     "useParentElement": true,
     "usePerformanceObserver": true,
     "watchDeep": true,
-    "watchImmediate": true
+    "watchImmediate": true,
+    "injectLocal": true,
+    "provideLocal": true
   }
 }
