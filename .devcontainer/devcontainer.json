@@ -1,6 +1,6 @@
 {
 	"name": "Node.js & TypeScript",
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:16-bullseye"
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:20",
 
 	// Features to add to the dev container. More info: https://containers.dev/implementors/features.
 	// "features": {},
@@ -9,7 +9,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "yarn install",
+	"postCreateCommand": "yarn install"
 
 	// Configure tool-specific properties.
 	// "customizations": {},
