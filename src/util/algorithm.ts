@@ -10,6 +10,7 @@ import { Generations } from "@pkmn/data";
 
 import { Dex } from "@pkmn/dex";
 import "@pkmn/dex/build/learnsets.min.js";
+import { Restriction } from "@/types/league";
 
 const gens = new Generations(Dex);
 
@@ -106,6 +107,7 @@ export interface EvaluationReport {
 
 export async function calculateData(
   generation: GenerationNum,
+  restriction?: Restriction,
 ): Promise<AlgorithmState> {
   const generationDex = Dex.forGen(generation);
   const allSpecies = generationDex.species.all();
@@ -177,45 +179,47 @@ export async function calculateData(
   const learnsets = generationData.learnsets;
   const rocker = await filter(
     allSpecies,
-    async (s) => await learnsets.canLearn(s.name, "Stealth Rock"),
+    async (s) => await learnsets.canLearn(s.name, "Stealth Rock", restriction),
   );
   const hazardRemover = await filter(
     allSpecies,
     async (s) =>
-      (await learnsets.canLearn(s.name, "Rapid Spin")) ||
-      (generation >= 6 && (await learnsets.canLearn(s.name, "Defog"))) ||
-      (await learnsets.canLearn(s.name, "Court Change")),
+      (await learnsets.canLearn(s.name, "Rapid Spin", restriction)) ||
+      (generation >= 6 &&
+        (await learnsets.canLearn(s.name, "Defog", restriction))) ||
+      (await learnsets.canLearn(s.name, "Court Change", restriction)),
   );
   const otherHazards = await filter(
     allSpecies,
     async (s) =>
-      (await learnsets.canLearn(s.name, "Spikes")) ||
-      (await learnsets.canLearn(s.name, "Sticky Web")) ||
-      (await learnsets.canLearn(s.name, "Toxic Spikes")),
+      (await learnsets.canLearn(s.name, "Spikes", restriction)) ||
+      (await learnsets.canLearn(s.name, "Sticky Web", restriction)) ||
+      (await learnsets.canLearn(s.name, "Toxic Spikes", restriction)),
   );
   const momentumUser = await filter(
     allSpecies,
     async (s) =>
-      (await learnsets.canLearn(s.name, "U-turn")) ||
-      (await learnsets.canLearn(s.name, "Volt Switch")) ||
-      (await learnsets.canLearn(s.name, "Baton Pass")) ||
-      (await learnsets.canLearn(s.name, "Flip Turn")) ||
-      (generation >= 8 && (await learnsets.canLearn(s.name, "Teleport"))),
+      (await learnsets.canLearn(s.name, "U-turn", restriction)) ||
+      (await learnsets.canLearn(s.name, "Volt Switch", restriction)) ||
+      (await learnsets.canLearn(s.name, "Baton Pass", restriction)) ||
+      (await learnsets.canLearn(s.name, "Flip Turn", restriction)) ||
+      (generation >= 8 &&
+        (await learnsets.canLearn(s.name, "Teleport", restriction))),
   );
 
   const fakeOutUser = await filter(
     allSpecies,
-    async (s) => await learnsets.canLearn(s.name, "Fake Out"),
+    async (s) => await learnsets.canLearn(s.name, "Fake Out", restriction),
   );
   const tailwindUser = await filter(
     allSpecies,
-    async (s) => await learnsets.canLearn(s.name, "Tailwind"),
+    async (s) => await learnsets.canLearn(s.name, "Tailwind", restriction),
   );
   const redirectUser = await filter(
     allSpecies,
     async (s) =>
-      (await learnsets.canLearn(s.name, "Follow Me")) ||
-      (await learnsets.canLearn(s.name, "Rage Powder")),
+      (await learnsets.canLearn(s.name, "Follow Me", restriction)) ||
+      (await learnsets.canLearn(s.name, "Rage Powder", restriction)),
   );
   const intimidateUser = getAbilityMons(allSpecies, ["Intimidate"]);
 
@@ -277,9 +281,10 @@ export async function evaluateTeam(
   teamPokemon: Species[] | Species[][],
   algorithmState: AlgorithmState | GenerationNum,
   doubles?: boolean,
+  restriction?: Restriction,
 ): Promise<EvaluationReport> {
   if (typeof algorithmState === "number")
-    algorithmState = await calculateData(algorithmState);
+    algorithmState = await calculateData(algorithmState, restriction);
 
   const mergedTeam: Species[] = [];
   if (teamPokemon.length > 0) {
@@ -489,8 +494,10 @@ export async function generateTeam(
   algorithmState?: AlgorithmState,
   doubles?: boolean,
   iterations = 1000,
+  restriction?: Restriction,
 ): Promise<[Species[][], EvaluationReport]> {
-  if (!algorithmState) algorithmState = await calculateData(generation);
+  if (!algorithmState)
+    algorithmState = await calculateData(generation, restriction);
 
   let bestTeam = [] as Species[][];
   let bestEvaluation: EvaluationReport = {
@@ -531,7 +538,12 @@ export async function generateTeam(
       }
       newTeam.push(currentRequirementSpecies);
     }
-    const teamEvaluation = await evaluateTeam(newTeam, algorithmState, doubles);
+    const teamEvaluation = await evaluateTeam(
+      newTeam,
+      algorithmState,
+      doubles,
+      restriction,
+    );
     if (teamEvaluation.value > bestEvaluation.value) {
       bestEvaluation = teamEvaluation;
       bestTeam = newTeam;

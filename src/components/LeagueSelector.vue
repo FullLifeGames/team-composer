@@ -32,6 +32,7 @@ import smlS8CSV from "@/assets/leagues/SML_S8.csv?url";
 import smlS9CSV from "@/assets/leagues/SML_S9.csv?url";
 import mtlCSV from "@/assets/leagues/MTL.csv?url";
 import ubrlCSV from "@/assets/leagues/UBRL.csv?url";
+import udtS8CSV from "@/assets/leagues/UDT_S8.csv?url";
 import vblS3CSV from "@/assets/leagues/VBL_S3.csv?url";
 import { useRouter } from "vue-router";
 
@@ -102,6 +103,7 @@ let initalLeagueObject: League = {
   generation: 9,
   requirements: [1, 2, 3, 3, 2],
   language: "de",
+  restriction: "Paldea",
 };
 
 const leagues: League[] = [
@@ -234,6 +236,14 @@ const leagues: League[] = [
     generation: 4,
     requirements: [3, 8],
     language: "de",
+  },
+  {
+    displayName: "UDT S8",
+    csvLink: udtS8CSV,
+    generation: 9,
+    requirements: [1, 2, 2, 2, 1, 4],
+    language: "de",
+    restriction: "Paldea",
   },
   {
     displayName: "VBL S3 (Nat Dex)",

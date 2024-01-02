@@ -107,6 +107,8 @@ async function generate() {
     filter.value,
     undefined,
     league.value.doubles,
+    1000,
+    league.value.restriction,
   );
   team.value = result[0];
   evaluationReport.value = result[1];

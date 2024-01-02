@@ -87,6 +87,7 @@ async function filterSpeciesArray(speciesList: Species[]) {
       filterResult = await generationData.value.learnsets.canLearn(
         entry.name,
         props.monFilterOption.filterMove,
+        props.league.restriction,
       );
     }
     if (

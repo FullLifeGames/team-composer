@@ -23,7 +23,7 @@ export async function parseFile(draftMonsUrl: string) {
 }
 
 export async function parseString(allText: string) {
-  const draftMons: string[][] = [[], [], [], [], []];
+  const draftMons: string[][] = [[], [], [], [], [], []];
   const response = await fetch(translationUrl);
   const translation = await response.json();
   const lines = allText.split("\n");
