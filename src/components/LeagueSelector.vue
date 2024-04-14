@@ -24,6 +24,7 @@ import miniHKPCSV from "@/assets/leagues/Mini-HKP.csv?url";
 import mplCSV from "@/assets/leagues/MPL.csv?url";
 import npblS6CSV from "@/assets/leagues/NPBL_S6.csv?url";
 import npblS7CSV from "@/assets/leagues/NPBL_S7.csv?url";
+import palsCSV from "@/assets/leagues/PALs.csv?url";
 import pbaS2CSV from "@/assets/leagues/PBA_S2.csv?url";
 import pbaS3CSV from "@/assets/leagues/PBA_S3.csv?url";
 import pbaS5CSV from "@/assets/leagues/PBA_S5.csv?url";
@@ -181,6 +182,13 @@ const leagues: League[] = [
     language: "de",
   },
   initalLeagueObject,
+  {
+    displayName: "PALs",
+    csvLink: palsCSV,
+    generation: 3,
+    requirements: [2, 3, 3, 3],
+    language: "de",
+  },
   {
     displayName: "PBA S2",
     csvLink: pbaS2CSV,
