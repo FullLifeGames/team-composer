@@ -15,6 +15,7 @@ import type { League } from "@/types/league";
 import { Dex, type GenerationNum } from "@pkmn/dex";
 
 import brlS2CSV from "@/assets/leagues/BRL_S2.csv?url";
+import gpcCSV from "@/assets/leagues/GPC.csv?url";
 import gplS5CSV from "@/assets/leagues/GPL_S5.csv?url";
 import gplS6CSV from "@/assets/leagues/GPL_S6.csv?url";
 import gplS7CSV from "@/assets/leagues/GPL_S7.csv?url";
@@ -100,10 +101,10 @@ const props = defineProps({
 });
 
 let initalLeagueObject: League = {
-  displayName: "SPL S11",
-  csvLink: splS11CSV,
+  displayName: "GPC",
+  csvLink: gpcCSV,
   generation: 9,
-  requirements: [2, 2, 3, 3, 1],
+  requirements: [2, 3, 3, 3],
   language: "de",
   restriction: "Paldea",
 };
@@ -125,6 +126,7 @@ const leagues: League[] = [
   dexReceiver(7),
   dexReceiver(8),
   dexReceiver(9),
+  initalLeagueObject,
   {
     displayName: "GPL S5",
     csvLink: gplS5CSV,
@@ -239,7 +241,14 @@ const leagues: League[] = [
     requirements: [3, 3, 3, 3],
     language: "de",
   },
-  initalLeagueObject,
+  {
+    displayName: "SPL S11",
+    csvLink: splS11CSV,
+    generation: 9,
+    requirements: [2, 2, 3, 3, 1],
+    language: "de",
+    restriction: "Paldea",
+  },
   {
     displayName: "MTL",
     csvLink: mtlCSV,
