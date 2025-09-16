@@ -170,6 +170,7 @@ const leagues: League[] = [
     generation: 9,
     requirements: [2, 3, 3, 2, 1],
     language: "de",
+    restriction: "Paldea",
     doubles: true,
   },
   {
