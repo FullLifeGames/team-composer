@@ -2,24 +2,24 @@ Boreos		Alola-Vulnona		Aggrostella		Affiti		Adebom
 Boreos-Therian		Arkani		Amfira		Alola-Raichu		Admurai
 Cupidos		Azugladis		Aquana		Alola-Sleimok		Agiluza
 Demeteros-Therian		Azumarill		Aranestro		Alola-Snobilikat		Alola-Geowaz
-Deoxys-Geschwindigkeit		Bailonda		Axantor		Altaria		Alola-Kokowei
-Deoxys-Verteidigung		Barrakiefa		Bandelby		Arktos		Alola-Sandamer
+Deoxys-S		Bailonda		Axantor		Altaria		Alola-Kokowei
+Deoxys-D		Barrakiefa		Bandelby		Arktos		Alola-Sandamer
 Dinglu		Benesaru		Beatori		Austos		Alpollo
 Donnersichel		Bojelin		Bisaflor		Baldorfish		Ambidiffel
 Dragoran		Boninu		Brigaron		Blitza		Ampharos
 Eisenfalter		Brüllschweif		Bronzong		Caesurio		Arbok
 Eisenfels		Brutalanda		Chongjian		Chaneira		Ariados
-Eisenhand		Cresselia		Choreogel-Buyo		Chelterrar		Arktilas
-Eisenkrieger		Demeteros		Choreogel-Cheerleading		Chillabell		Backel
-Epitaff		Despotar		Choreogel-Flamenco		Chimstix		Banette
-Fuegro		Eisenhals		Choreogel-Hula		Donarion		Barschuft
+Eisenhand		Cresselia		Choreogel		Chelterrar		Arktilas
+Eisenkrieger		Demeteros		Choreogel-Pom-Pom		Chillabell		Backel
+Epitaff		Despotar		Choreogel-Sensu		Chimstix		Banette
+Fuegro		Eisenhals		Choreogel-Pa'u		Donarion		Barschuft
 Galar-Laschoking		Eisenhaupt		Clavion		Donphan		Blubella
 Galar-Zapdos		Eisenrad		Crimanzo		Dressella		Bollterus
 Gladimperio		Elfun		Cupidos-Therian		Drifzepeli		Botogel
 Gortrom		Entei		Curelei		Dummimisel		Britzigel
 Heatran		Famieps		Diancie		Duraludon		Calamanero
 Heerashai		Farbeagle		Ditto		Elektek		Camerupt
-Hoopa-Entfesselt		Fatalitcha		Eisenblatt		Fennexis		Chevrumm
+Hoopa-U		Fatalitcha		Eisenblatt		Fennexis		Chevrumm
 Hutsassa		Fiaro		Eisendorn		Flambirex		Colossand
 Jirachi		Galagladi		Farigiraf		Forstellka		Coronospa
 Katapuldra		Galar-Lavados		Feelinara		Frosdedje		Damhirplex
@@ -34,10 +34,10 @@ Maskagato		Hisui-Tornupto		Hariyama		Humanolith		Dummisel
 Mew		Hisui-Viscogon		Heiteira		Hundemon		Duodino
 Necrozma		Hisui-Zoroark		Hippoterus		Illumise		Elevoltek
 Ogerpon		Hydrapfel		Hisui-Baldorfish		Intelleon		Entoron
-Ogerpon-Gestein		Impoleon		Hisui-Silvarro		Kapoera		Firnontor
-Ogerpon-Wasser		Infamomo		Hisui-Washakwil		Keifel		Flamara
+Ogerpon-C		Impoleon		Hisui-Silvarro		Kapoera		Firnontor
+Ogerpon-W		Infamomo		Hisui-Washakwil		Keifel		Flamara
 Pelipper		Keldeo		Hoopa		Kicklee		Folipurba
-Psiopatra		Krarmor		Impergator		Knattatox		Fragunz-m
+Psiopatra		Krarmor		Impergator		Knattatox		Fragrunz
 Quajutsu		Kriechflügel		Irokex		Knirfish		Friedwuff
 Qurtel		Laschoking		Kamalm		Kokowei		Frigometri
 Ramoth		Mamolida		Kapilz		Kommandutan		Geowaz
@@ -56,13 +56,13 @@ Zapdos		Pixi		Lucario		Mastifioso		Hisui-Viscargot
 		Regieleki		Mopex		Morlord		Klibbe
 		Rotom-Wash		Mortipot		Olithena		Knarksel
 		Salmagnis-m		Myriador		Omot		Knuddeluff
-		Salmagnis-w		Nachtara		Paldea-Tauros		Koalelu
+		Salmagnis-f		Nachtara		Tauros-Paldea		Koalelu
 		Scherox		Nigiragi		Pampross		Kramshef
-		Serpiroyal		Paldea-Tauros-w		Papungha		Krawalloro
-		Servol-m		Paldea-Tauros-m		Patinaraja		Kronjuwild
-		Servol-w		Panzaeron		Piepi		Kryppuk
+		Serpiroyal		Tauros-Paldea-Fire		Papungha		Krawalloro
+		Servol-m		Tauros-Paldea-Water		Patinaraja		Kronjuwild
+		Servol-f		Panzaeron		Piepi		Kryppuk
 		Silembrim		Polaross		Pokusan		Kubuin
-		Skelokrok		Porygon-Z		Psiaugon-Männlich		Lapras
+		Skelokrok		Porygon-Z		Psiaugon		Lapras
 		Snibunna		Rabigator		Quartermak		Legios
 		Stalobor		Regidrago		Raichu		Lektrobal
 		Suicune		Registeel		Rasaff		Liebiskus
@@ -96,7 +96,7 @@ Zapdos		Pixi		Lucario		Mastifioso		Hisui-Viscargot
 				Zoroark		Wolwerock-Tag		Plusle
 				Zwirrklop		Zapplarang		Porygon
 						Zwirrfinst		Psiana
-								Psiaugon-Weiblich
+								Psiaugon-f
 								Pyroleo
 								Quappo
 								Rameidon
