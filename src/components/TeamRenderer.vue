@@ -88,6 +88,14 @@
             >Intimidate User:
             {{ props.evaluationReport.intimidateUser }}</b-list-group-item
           >
+          <b-list-group-item v-if="props.league.doubles"
+            >Speed Control User:
+            {{ props.evaluationReport.speedControlUser }}</b-list-group-item
+          >
+          <b-list-group-item v-if="props.league.doubles"
+            >Trick Room User:
+            {{ props.evaluationReport.trickRoomUser }}</b-list-group-item
+          >
         </b-list-group>
       </b-col>
     </b-row>

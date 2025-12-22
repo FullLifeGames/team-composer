@@ -63,6 +63,24 @@ const createCustomRouter = (emitter: Emitter<Record<EventType, unknown>>) => {
       // component: () => import("@/views/About.vue")
     },
     {
+      path: "/order-page",
+      name: "OrderPageStart",
+      // NOTE: you can also apply meta information
+      // meta: {authRequired: false }
+      component: () => import("@/views/OrderPage.vue"),
+      // NOTE: you can also lazy-load the component
+      // component: () => import("@/views/About.vue")
+    },
+    {
+      path: "/order-page/:league",
+      name: "OrderPage",
+      // NOTE: you can also apply meta information
+      // meta: {authRequired: false }
+      component: () => import("@/views/OrderPage.vue"),
+      // NOTE: you can also lazy-load the component
+      // component: () => import("@/views/About.vue")
+    },
+    {
       path: "/draft-league-application",
       name: "DraftLeagueApplication",
       // NOTE: you can also apply meta information

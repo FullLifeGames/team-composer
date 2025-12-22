@@ -28,6 +28,13 @@
               >Team Evaluator</b-nav-item
             >
           </router-link>
+          <!--
+            <router-link v-slot="{ href, isExactActive }" to="/order-page" custom>
+              <b-nav-item :href="href" :active="isExactActive"
+                >Order Page</b-nav-item
+              >
+            </router-link>
+          -->
           <router-link
             v-slot="{ href, isExactActive }"
             to="/draft-league-application"

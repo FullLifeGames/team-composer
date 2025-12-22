@@ -82,6 +82,8 @@ export interface AlgorithmState {
   tailwindUser: Species[];
   redirectUser: Species[];
   intimidateUser: Species[];
+  speedControlUser: Species[];
+  trickRoomUser: Species[];
 }
 
 export interface EvaluationReport {
@@ -103,6 +105,8 @@ export interface EvaluationReport {
   tailwindUser?: number;
   redirectUser?: number;
   intimidateUser?: number;
+  speedControlUser?: number;
+  trickRoomUser?: number;
 }
 
 export async function calculateData(
@@ -222,6 +226,16 @@ export async function calculateData(
       (await learnsets.canLearn(s.name, "Rage Powder", restriction)),
   );
   const intimidateUser = getAbilityMons(allSpecies, ["Intimidate"]);
+  const speedControlUser = await filter(
+    allSpecies,
+    async (s) =>
+      (await learnsets.canLearn(s.name, "Icy Wind", restriction)) ||
+      (await learnsets.canLearn(s.name, "Electro Web", restriction)),
+  );
+  const trickRoomUser = await filter(
+    allSpecies,
+    async (s) => await learnsets.canLearn(s.name, "Trick Room", restriction),
+  );
 
   const sunSetter = getAbilityMons(allSpecies, sunAbilities);
   const rainSetter = getAbilityMons(allSpecies, rainAbilities);
@@ -274,6 +288,8 @@ export async function calculateData(
     tailwindUser,
     redirectUser,
     intimidateUser,
+    speedControlUser,
+    trickRoomUser,
   } as AlgorithmState;
 }
 
@@ -331,6 +347,12 @@ export async function evaluateTeam(
       mergedTeam.some((mergedMon) => mergedMon.id === s.id),
     ).length;
     const intimidateUser = algorithmState.intimidateUser.filter((s) =>
+      mergedTeam.some((mergedMon) => mergedMon.id === s.id),
+    ).length;
+    const speedControlUser = algorithmState.speedControlUser.filter((s) =>
+      mergedTeam.some((mergedMon) => mergedMon.id === s.id),
+    ).length;
+    const trickRoomUser = algorithmState.trickRoomUser.filter((s) =>
       mergedTeam.some((mergedMon) => mergedMon.id === s.id),
     ).length;
 
@@ -441,6 +463,8 @@ export async function evaluateTeam(
     evaluationReport.tailwindUser = tailwindUser;
     evaluationReport.redirectUser = redirectUser;
     evaluationReport.intimidateUser = intimidateUser;
+    evaluationReport.speedControlUser = speedControlUser;
+    evaluationReport.trickRoomUser = trickRoomUser;
 
     evaluationReport.value =
       statValue *
@@ -476,6 +500,14 @@ export async function evaluateTeam(
           // +6 since not essential
           (algorithmState.intimidateUser.length > 0
             ? Math.log(intimidateUser + 6)
+            : 1) *
+          // +6 since not essential
+          (algorithmState.speedControlUser.length > 0
+            ? Math.log(speedControlUser + 6)
+            : 1) *
+          // +6 since not essential
+          (algorithmState.trickRoomUser.length > 0
+            ? Math.log(trickRoomUser + 6)
             : 1)
         : 1) *
       // Can only reduce, since max is 1
